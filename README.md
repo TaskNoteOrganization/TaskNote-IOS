@@ -77,3 +77,20 @@ TaskNotes is a lightweight productivity app designed for creatives and developer
 * Note (Goes to Note list screen)
 * Task (Goes to Task list screen)
 * Settings (Goes to Settings screen)
+
+## Wireframes
+
+### Screen 1
+![Wireframe 1](./imgs/Wire1.png)
+
+### Screen 2
+![Wireframe 2](./imgs/Wire2.png)
+
+### Screen 3
+![Wireframe 3](./imgs/Wire3.png)
+
+### Screen 4
+![Wireframe 4](./imgs/Wire4.png)
+
+### Screen 5
+![Wireframe 5](./imgs/Wire5.png)
