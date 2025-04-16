@@ -22,7 +22,7 @@ struct ReminderTests {
             "is_sent": false
         }
         """
-        let reminder = try decodeReminder(from: json)
+        let reminder = try Reminder.decodeReminder(from: json)
         #expect(reminder.isSent == false)
     }
     
@@ -37,7 +37,7 @@ struct ReminderTests {
         }
         """
         do {
-            _ = try decodeReminder(from: json)
+            _ = try Reminder.decodeReminder(from: json)
             #expect(Bool(false), "Expected decoding to fail for missing task_id")
         } catch {
             #expect(Bool(true))
@@ -54,7 +54,7 @@ struct ReminderTests {
         }
         """
         do {
-            _ = try decodeReminder(from: json)
+            _ = try Reminder.decodeReminder(from: json)
             #expect(Bool(false), "Expected decoding to fail for missing remind_at")
         } catch {
             #expect(Bool(true))
@@ -72,18 +72,10 @@ struct ReminderTests {
         }
         """
         do {
-            _ = try decodeReminder(from: json)
+            _ = try Reminder.decodeReminder(from: json)
             #expect(Bool(false), "Expected decoding to fail for missing is_sent")
         } catch {
             #expect(Bool(true))
         }
-    }
-    
-    // JSON decoding helper
-    private func decodeReminder(from json: String) throws -> Reminder {
-        let data = json.data(using: .utf8)!
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
-        return try decoder.decode(Reminder.self, from: data)
     }
 }

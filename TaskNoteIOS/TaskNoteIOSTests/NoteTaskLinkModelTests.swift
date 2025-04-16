@@ -26,7 +26,7 @@ struct NoteTaskLinkTests {
             "task_id": 42
         }
         """
-        let link = try decodeNoteTaskLink(from: json)
+        let link = try NoteTaskLink.decodeNoteTaskLink(from: json)
         #expect(link.noteId == 1)
         #expect(link.taskId == 42)
     }
@@ -39,7 +39,7 @@ struct NoteTaskLinkTests {
         }
         """
         do {
-            _ = try decodeNoteTaskLink(from: json)
+            _ = try NoteTaskLink.decodeNoteTaskLink(from: json)
             #expect(Bool(false), "Expected decoding to fail")
         } catch {
             #expect(Bool(true))
@@ -55,7 +55,7 @@ struct NoteTaskLinkTests {
         }
         """
         do {
-            _ = try decodeNoteTaskLink(from: json)
+            _ = try NoteTaskLink.decodeNoteTaskLink(from: json)
             #expect(Bool(false), "Expected decoding to fail")
         } catch {
             #expect(Bool(true))
@@ -70,16 +70,10 @@ struct NoteTaskLinkTests {
         }
         """
         do {
-            _ = try decodeNoteTaskLink(from: json)
+            _ = try NoteTaskLink.decodeNoteTaskLink(from: json)
             #expect(Bool(false), "Expected decoding to fail")
         } catch {
             #expect(Bool(true))
         }
-    }
-    
-    // Shared decoding helper
-    private func decodeNoteTaskLink(from json: String) throws -> NoteTaskLink {
-        let data = json.data(using: .utf8)!
-        return try JSONDecoder().decode(NoteTaskLink.self, from: data)
     }
 }

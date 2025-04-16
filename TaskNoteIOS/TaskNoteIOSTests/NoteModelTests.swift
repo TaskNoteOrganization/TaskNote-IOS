@@ -23,7 +23,7 @@ struct NoteModelTests {
                 "created_at": "\(iso.string(from: Date()))"
             }
             """
-        let note = try decodeNote(from: json)
+        let note = try Note.decodeNote(from: json)
         #expect(note.title == "Linked Note")
         #expect(note.filePath.contains("note-1.md"))
     }
@@ -40,7 +40,7 @@ struct NoteModelTests {
                 "created_at": "\(iso.string(from: Date()))"
             }
             """
-        let note = try decodeNote(from: json)
+        let note = try Note.decodeNote(from: json)
         #expect(note.title == nil)
     }
     
@@ -55,7 +55,7 @@ struct NoteModelTests {
                 "created_at": "\(iso.string(from: Date()))"
             }
             """
-        let note = try decodeNote(from: json)
+        let note = try Note.decodeNote(from: json)
         #expect(note.title == nil)
     }
     
@@ -70,15 +70,7 @@ struct NoteModelTests {
                 "created_at": "\(iso.string(from: Date()))"
             }
             """
-        let note = try decodeNote(from: json)
+        let note = try Note.decodeNote(from: json)
         #expect(note.filePath.contains("note-4.md"))
-    }
-    
-    // Shared decoder
-    private func decodeNote(from json: String) throws -> Note {
-        let data = json.data(using: .utf8)!
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
-        return try decoder.decode(Note.self, from: data)
     }
 }

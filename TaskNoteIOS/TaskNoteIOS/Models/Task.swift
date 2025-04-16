@@ -27,5 +27,12 @@ struct Task: Codable, Identifiable {
         case parentId = "parent_id"
         case createdAt = "created_at"
     }
+    
+    public static func decodeTask(from json: String) throws -> Task {
+        let data = json.data(using: .utf8)!
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        return try decoder.decode(Task.self, from: data)
+    }
 }
 

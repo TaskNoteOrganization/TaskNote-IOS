@@ -9,14 +9,6 @@ import Foundation
 @testable import TaskNoteIOS
 
 @Suite("Task Model Tests") struct TaskModelTests {
-    
-    private func decodeTask(from json: String) throws -> Task {
-        let data = json.data(using: .utf8)!
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
-        return try decoder.decode(Task.self, from: data)
-    }
-    
     @Test("Task Initialization")
     func taskInitalizationTest() throws {
         let json = """
@@ -28,7 +20,7 @@ import Foundation
                     "created_at": "\(ISO8601DateFormatter().string(from: Date()))"
                 }
                 """
-        let task = try decodeTask(from: json)
+        let task = try Task.decodeTask(from: json)
         #expect(task.title == "Sample Task")
         #expect(task.status == "pending")
     }
@@ -45,7 +37,7 @@ import Foundation
                     "created_at": "\(ISO8601DateFormatter().string(from: Date()))"
                 }
                 """
-        let task = try decodeTask(from: json)
+        let task = try Task.decodeTask(from: json)
         #expect(task.description == "Detailed task here")
     }
     
@@ -62,7 +54,7 @@ import Foundation
                     "created_at": "\(ISO8601DateFormatter().string(from: Date()))"
                 }
                 """
-        let task = try decodeTask(from: json)
+        let task = try Task.decodeTask(from: json)
         #expect(task.dueDate != nil)
     }
     
@@ -79,7 +71,7 @@ import Foundation
                     "created_at": "\(ISO8601DateFormatter().string(from: Date()))"
                 }
                 """
-        let task = try decodeTask(from: json)
+        let task = try Task.decodeTask(from: json)
         #expect(task.parentId == parentId)
     }
     
@@ -95,7 +87,7 @@ import Foundation
                 "created_at": "\(ISO8601DateFormatter().string(from: Date()))"
             }
             """
-        let task = try decodeTask(from: json)
+        let task = try Task.decodeTask(from: json)
         #expect(task.description == nil)
     }
     
@@ -111,7 +103,7 @@ import Foundation
                 "created_at": "\(ISO8601DateFormatter().string(from: Date()))"
             }
             """
-        let task = try decodeTask(from: json)
+        let task = try Task.decodeTask(from: json)
         #expect(task.dueDate == nil)
     }
     
@@ -127,7 +119,7 @@ import Foundation
                 "created_at": "\(ISO8601DateFormatter().string(from: Date()))"
             }
             """
-        let task = try decodeTask(from: json)
+        let task = try Task.decodeTask(from: json)
         #expect(task.parentId == nil)
     }
     
@@ -142,7 +134,7 @@ import Foundation
                 "created_at": "\(ISO8601DateFormatter().string(from: Date()))"
             }
             """
-        let task = try decodeTask(from: json)
+        let task = try Task.decodeTask(from: json)
         #expect(task.description == nil)
         #expect(task.dueDate == nil)
         #expect(task.parentId == nil)
@@ -169,7 +161,7 @@ import Foundation
                     "created_at": "\(createdAt)"
                 }
                 """
-        let task = try decodeTask(from: json)
+        let task = try Task.decodeTask(from: json)
         #expect(task.id == id)
         #expect(task.userId == userId)
         #expect(task.title == "Full Feature Task")

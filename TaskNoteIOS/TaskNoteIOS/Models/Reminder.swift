@@ -18,4 +18,11 @@ struct Reminder: Codable, Identifiable {
         case remindAt = "remind_at"
         case isSent = "is_sent"
     }
+    
+    public static func decodeReminder(from json: String) throws -> Reminder {
+        let data = json.data(using: .utf8)!
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        return try decoder.decode(Reminder.self, from: data)
+    }
 }

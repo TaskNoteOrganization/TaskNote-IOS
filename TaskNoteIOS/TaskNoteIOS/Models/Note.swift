@@ -20,5 +20,12 @@ struct Note: Codable, Identifiable {
         case filePath = "file_path"
         case createdAt = "created_at"
     }
+    
+    public static func decodeNote(from json: String) throws -> Note {
+        let data = json.data(using: .utf8)!
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        return try decoder.decode(Note.self, from: data)
+    }
 }
 
