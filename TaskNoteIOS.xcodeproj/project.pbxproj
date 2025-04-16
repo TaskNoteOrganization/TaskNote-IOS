@@ -11,7 +11,6 @@
 		3813E2C12DAF376A00BFBEDC /* PostgREST in Frameworks */ = {isa = PBXBuildFile; productRef = 3813E2C02DAF376A00BFBEDC /* PostgREST */; };
 		3813E2C32DAF376A00BFBEDC /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = 3813E2C22DAF376A00BFBEDC /* Storage */; };
 		3813E2C52DAF376A00BFBEDC /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 3813E2C42DAF376A00BFBEDC /* Supabase */; };
-		3813E2F72DAF424F00BFBEDC /* info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3813E2F62DAF424600BFBEDC /* info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,7 +34,6 @@
 		3813E2752DAF1C9F00BFBEDC /* TaskNoteIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskNoteIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3813E2852DAF1C9F00BFBEDC /* TaskNoteIOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TaskNoteIOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3813E28F2DAF1C9F00BFBEDC /* TaskNoteIOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TaskNoteIOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3813E2F62DAF424600BFBEDC /* info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -88,7 +86,6 @@
 		3813E26C2DAF1C9F00BFBEDC = {
 			isa = PBXGroup;
 			children = (
-				3813E2F62DAF424600BFBEDC /* info.plist */,
 				3813E2772DAF1C9F00BFBEDC /* TaskNoteIOS */,
 				3813E2882DAF1C9F00BFBEDC /* TaskNoteIOSTests */,
 				3813E2922DAF1C9F00BFBEDC /* TaskNoteIOSUITests */,
@@ -233,7 +230,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3813E2F72DAF424F00BFBEDC /* info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

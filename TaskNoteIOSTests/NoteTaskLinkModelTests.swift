@@ -4,12 +4,6 @@
 //
 //  Created by Alexander Betancourt on 4/15/25.
 //
-//
-//  NoteTaskLinkModelTests.swift
-//  TaskNoteIOS
-//
-//  Created by Alexander Betancourt on 4/15/25.
-//
 
 import Foundation
 import Testing
@@ -26,7 +20,8 @@ struct NoteTaskLinkTests {
             "task_id": 42
         }
         """
-        let link = try NoteTaskLink.decodeNoteTaskLink(from: json)
+        let data = json.data(using: .utf8)!
+        let link = try JSONDecoder.supabaseDecoder.decode(NoteTaskLink.self, from: data)
         #expect(link.noteId == 1)
         #expect(link.taskId == 42)
     }
@@ -38,11 +33,12 @@ struct NoteTaskLinkTests {
             "task_id": 42
         }
         """
+        let data = json.data(using: .utf8)!
         do {
-            _ = try NoteTaskLink.decodeNoteTaskLink(from: json)
-            #expect(Bool(false), "Expected decoding to fail")
+            _ = try JSONDecoder.supabaseDecoder.decode(NoteTaskLink.self, from: data)
+            #expect(Bool(false), "Expected decoding to fail for missing note_id")
         } catch {
-            #expect(Bool(true))
+            #expect(true)
         }
     }
     
@@ -54,11 +50,12 @@ struct NoteTaskLinkTests {
             "task_id": 42
         }
         """
+        let data = json.data(using: .utf8)!
         do {
-            _ = try NoteTaskLink.decodeNoteTaskLink(from: json)
-            #expect(Bool(false), "Expected decoding to fail")
+            _ = try JSONDecoder.supabaseDecoder.decode(NoteTaskLink.self, from: data)
+            #expect(Bool(false), "Expected decoding to fail for null note_id")
         } catch {
-            #expect(Bool(true))
+            #expect(true)
         }
     }
     
@@ -69,11 +66,12 @@ struct NoteTaskLinkTests {
             "note_id": 99
         }
         """
+        let data = json.data(using: .utf8)!
         do {
-            _ = try NoteTaskLink.decodeNoteTaskLink(from: json)
-            #expect(Bool(false), "Expected decoding to fail")
+            _ = try JSONDecoder.supabaseDecoder.decode(NoteTaskLink.self, from: data)
+            #expect(Bool(false), "Expected decoding to fail for missing task_id")
         } catch {
-            #expect(Bool(true))
+            #expect(true)
         }
     }
 }

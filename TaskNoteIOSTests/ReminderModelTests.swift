@@ -4,6 +4,7 @@
 //
 //  Created by Alexander Betancourt on 4/15/25.
 //
+
 import Foundation
 import Testing
 @testable import TaskNoteIOS
@@ -11,39 +12,43 @@ import Testing
 @Suite("Reminder Model Tests")
 struct ReminderTests {
     
+    private var formatter: DateFormatter {
+        DateFormatter.supabaseFixedMicrosecondFormatter
+    }
+    
     @Test("Valid reminder decoding")
     func validReminderTest() throws {
-        let iso = ISO8601DateFormatter()
         let json = """
         {
             "id": "\(UUID())",
             "task_id": "\(UUID())",
-            "remind_at": "\(iso.string(from: Date().addingTimeInterval(3600)))",
+            "remind_at": "\(formatter.string(from: Date().addingTimeInterval(3600)))",
             "is_sent": false
         }
         """
-        let reminder = try Reminder.decodeReminder(from: json)
+        let data = json.data(using: .utf8)!
+        let reminder = try JSONDecoder.supabaseDecoder.decode(Reminder.self, from: data)
         #expect(reminder.isSent == false)
     }
     
     @Test("Missing taskId should fail")
     func missingTaskIdTest() {
-        let iso = ISO8601DateFormatter()
         let json = """
         {
             "id": "\(UUID())",
-            "remind_at": "\(iso.string(from: Date()))",
+            "remind_at": "\(formatter.string(from: Date()))",
             "is_sent": false
         }
         """
+        let data = json.data(using: .utf8)!
         do {
-            _ = try Reminder.decodeReminder(from: json)
+            _ = try JSONDecoder.supabaseDecoder.decode(Reminder.self, from: data)
             #expect(Bool(false), "Expected decoding to fail for missing task_id")
         } catch {
-            #expect(Bool(true))
+            #expect(true)
         }
     }
-
+    
     @Test("Missing remindAt should fail")
     func missingRemindAtTest() {
         let json = """
@@ -53,29 +58,30 @@ struct ReminderTests {
             "is_sent": false
         }
         """
+        let data = json.data(using: .utf8)!
         do {
-            _ = try Reminder.decodeReminder(from: json)
+            _ = try JSONDecoder.supabaseDecoder.decode(Reminder.self, from: data)
             #expect(Bool(false), "Expected decoding to fail for missing remind_at")
         } catch {
-            #expect(Bool(true))
+            #expect(true)
         }
     }
-
+    
     @Test("Missing isSent should fail")
     func missingIsSentTest() {
-        let iso = ISO8601DateFormatter()
         let json = """
         {
             "id": "\(UUID())",
             "task_id": "\(UUID())",
-            "remind_at": "\(iso.string(from: Date()))"
+            "remind_at": "\(formatter.string(from: Date()))"
         }
         """
+        let data = json.data(using: .utf8)!
         do {
-            _ = try Reminder.decodeReminder(from: json)
+            _ = try JSONDecoder.supabaseDecoder.decode(Reminder.self, from: data)
             #expect(Bool(false), "Expected decoding to fail for missing is_sent")
         } catch {
-            #expect(Bool(true))
+            #expect(true)
         }
     }
 }
