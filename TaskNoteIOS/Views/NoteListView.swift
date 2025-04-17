@@ -9,13 +9,23 @@ import SwiftUI
 
 struct NoteListView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        
+        NavigationStack {
+            
+            VStack {
+                Image(systemName: "globe")
+                    .imageScale(.large)
+                    .foregroundStyle(.tint)
+                Text("Hello, world!")
+                
+                // Spacer()
+                
+                HomeNavBar()
+            }
+            .padding()
+            
         }
-        .padding()
+
     }
 }
 

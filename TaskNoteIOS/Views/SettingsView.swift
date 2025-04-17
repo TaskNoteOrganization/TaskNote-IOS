@@ -1,12 +1,13 @@
 //
-//  ContentView.swift
+//  SettingsView.swift
 //  TaskNoteIOS
 //
-//  Created by Alexander Betancourt on 4/15/25.
+//  Created by Edward Leon on 4/17/25.
 //
+
 import SwiftUI
 
-struct ContentView: View {
+struct SettingsView: View {
     var body: some View {
         
         NavigationStack {
@@ -24,9 +25,10 @@ struct ContentView: View {
             .padding()
             
         }
+        
     }
 }
 
 #Preview {
-    ContentView()
+    SettingsView()
 }
