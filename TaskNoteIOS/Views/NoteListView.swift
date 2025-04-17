@@ -13,10 +13,16 @@ struct NoteListView: View {
         NavigationStack {
             
             VStack {
-                Image(systemName: "globe")
-                    .imageScale(.large)
-                    .foregroundStyle(.tint)
-                Text("Hello, world!")
+                
+                VStack {
+                    
+                    Image(systemName: "globe")
+                        .imageScale(.large)
+                        .foregroundStyle(.tint)
+                    Text("Hello, world!")
+                    
+                }.frame(height: UIScreen.main.bounds.height * 0.8)
+                
                 
                 // Spacer()
                 

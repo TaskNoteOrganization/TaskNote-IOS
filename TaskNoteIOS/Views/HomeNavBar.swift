@@ -24,8 +24,13 @@ struct HomeNavBar: View {
                     NavigationLink{NoteListView()} label: {
                         
                         ZStack {
+                            
                             RoundedRectangle(cornerRadius: 10.0)
                                 .foregroundStyle(Color.pink)
+                            
+                            Image(systemName: "house")
+                                .imageScale(.large)
+                                .foregroundStyle(Color.white)
                             
                         }
                         
@@ -36,8 +41,13 @@ struct HomeNavBar: View {
                     NavigationLink{TaskListView()} label: {
                         
                         ZStack {
+                            
                             RoundedRectangle(cornerRadius: 10.0)
                                 .foregroundStyle(Color.pink)
+                            
+                            Image(systemName: "checkmark.square")
+                                .imageScale(.large)
+                                .foregroundStyle(Color.white)
                             
                         }
                         
@@ -49,8 +59,14 @@ struct HomeNavBar: View {
                     NavigationLink{SettingsView()} label: {
                         
                         ZStack {
+                            
                             RoundedRectangle(cornerRadius: 10.0)
                                 .foregroundStyle(Color.pink)
+                            
+                            Image(systemName: "gear")
+                                .imageScale(.large)
+                                .foregroundStyle(Color.white)
+                            
                             
                         }
                         
