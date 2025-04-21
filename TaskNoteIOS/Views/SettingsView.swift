@@ -1,5 +1,5 @@
 //
-//  NoteListView.swift
+//  SettingsView.swift
 //  TaskNoteIOS
 //
 //  Created by Edward Leon on 4/17/25.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NoteListView: View {
+struct SettingsView: View {
     var body: some View {
         
         NavigationStack {
@@ -23,7 +23,6 @@ struct NoteListView: View {
                     
                 }.frame(height: UIScreen.main.bounds.height * 0.8)
                 
-                
                 // Spacer()
                 
                 HomeNavBar()
@@ -31,10 +30,10 @@ struct NoteListView: View {
             .padding()
             
         }
-
+        
     }
 }
 
 #Preview {
-    NoteListView()
+    SettingsView()
 }
