@@ -16,17 +16,29 @@ struct TaskListView: View {
                 
                 VStack {
                     
-                    ZStack {
-                        Rectangle().foregroundStyle(Color.gray)
-                        
-                        Text("Task List").foregroundStyle(Color.white).fontWeight(.bold)
-                        
-                    }.frame(height: UIScreen.main.bounds.height * 0.05)
+                    TopMiniBar(someTitle: "Task and Notes List")
                     
-                    Image(systemName: "globe")
-                        .imageScale(.large)
-                        .foregroundStyle(.tint)
-                    Text("Hello, world!")
+                    VStack {
+                        
+                        HStack {
+                            
+                            Text("Current Tasks:").fontWeight(.bold).font(.title2)
+                            Spacer()
+                            
+                        }
+                        
+                    }
+                    
+                    VStack {
+                        
+                        HStack {
+                            
+                            Text("Recent Notes").fontWeight(.bold).font(.title2)
+                            Spacer()
+                            
+                        }
+                        
+                    }
                     
                     Spacer()
                     

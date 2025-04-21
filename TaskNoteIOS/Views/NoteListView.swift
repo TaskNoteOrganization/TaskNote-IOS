@@ -16,12 +16,7 @@ struct NoteListView: View {
                 
                 VStack {
                     
-                    ZStack {
-                        Rectangle().foregroundStyle(Color.gray)
-                        
-                        Text("Note List").foregroundStyle(Color.white).fontWeight(.bold)
-                        
-                    }.frame(height: UIScreen.main.bounds.height * 0.05)
+                    TopMiniBar(someTitle: "Note List")
                     
                     Image(systemName: "globe")
                         .imageScale(.large)
