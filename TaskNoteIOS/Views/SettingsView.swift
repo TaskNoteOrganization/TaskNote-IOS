@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct SettingsView: View {
+    
+    @State private var darkMode : Bool = false
+    
     var body: some View {
         
         NavigationStack {
@@ -18,10 +21,68 @@ struct SettingsView: View {
                     
                     TopMiniBar(someTitle: "Settings")
                     
-                    Image(systemName: "globe")
-                        .imageScale(.large)
-                        .foregroundStyle(.tint)
-                    Text("Hello, world!")
+                    VStack {
+                        
+                        Spacer()
+                        
+                        HStack {
+                            
+                            Button(action: tempFunc) {
+                                Label("Log out", systemImage: "arrow.up").font(.title2)
+                            }
+                            .buttonStyle(.bordered)
+                            
+                            Spacer()
+                        }
+                        
+                        HStack {
+                            
+                            Button(action: tempFunc) {
+                                Label("Change Password", systemImage: "arrow.up").font(.title2)
+                            }
+                            .buttonStyle(.bordered)
+                            
+                            Spacer()
+                        }
+                        
+                        HStack {
+                            
+                            Button(action: tempFunc) {
+                                Label("Change Username", systemImage: "arrow.up").font(.title2)
+                            }
+                            .buttonStyle(.bordered)
+                            
+                            Spacer()
+                        }
+                        
+                        HStack {
+                            
+                            Button(action: tempFunc) {
+                                Label("Change Emai", systemImage: "arrow.up").font(.title2)
+                            }
+                            .buttonStyle(.bordered)
+                            
+                            Spacer()
+                        }
+                        
+                        Toggle("Dark Mode", isOn: $darkMode).font(.title2)
+                        
+                        Spacer()
+                        
+                        HStack {
+                            
+                            Button(action: tempFunc) {
+                                Label("Delete Account", systemImage: "arrow.up").font(.title2)
+                            }
+                            .buttonStyle(.bordered).tint(Color.red)
+                            
+                            Spacer()
+                        }
+                        
+                        Spacer()
+                        Spacer()
+                        
+                    }
                     
                     Spacer()
                     
@@ -36,6 +97,10 @@ struct SettingsView: View {
         }.navigationBarBackButtonHidden(true)
         
     }
+}
+
+func tempFunc() {
+    
 }
 
 #Preview {

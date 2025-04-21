@@ -27,6 +27,11 @@ struct TaskListView: View {
                             
                         }
                         
+                        ScrollView
+                        {
+                            
+                        }.frame(height: UIScreen.main.bounds.height * 0.3)
+                        
                     }
                     
                     VStack {
@@ -35,6 +40,10 @@ struct TaskListView: View {
                             
                             Text("Recent Notes").fontWeight(.bold).font(.title2)
                             Spacer()
+                            
+                        }
+                        
+                        ScrollView {
                             
                         }
                         
