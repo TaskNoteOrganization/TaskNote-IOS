@@ -16,20 +16,27 @@ struct TaskListView: View {
                 
                 VStack {
                     
+                    ZStack {
+                        Rectangle().foregroundStyle(Color.gray)
+                        
+                        Text("Task List").foregroundStyle(Color.white).fontWeight(.bold)
+                        
+                    }.frame(height: UIScreen.main.bounds.height * 0.05)
+                    
                     Image(systemName: "globe")
                         .imageScale(.large)
                         .foregroundStyle(.tint)
                     Text("Hello, world!")
                     
+                    Spacer()
+                    
                 }.frame(height: UIScreen.main.bounds.height * 0.8)
-                
-                // Spacer()
                 
                 HomeNavBar()
             }
             .padding()
             
-        }
+        }.navigationBarBackButtonHidden(true)
 
     }
 }
