@@ -20,7 +20,7 @@ TaskNotes is a lightweight productivity app designed for creatives and developer
 - **Story:**  The goal of TaskNotes is to make a app for creatives/developers that makes it easy to track project process and keep relevant notes together
 - **Market:** Developers looking to store notes on/manage tasks
 - **Habit:** Meant for daily/frequent use
-- **Scope:** Very simplistic app for productivity. 
+- **Scope:** Very simplistic app for productivity.
 
 ## Product Spec
 
@@ -94,3 +94,23 @@ TaskNotes is a lightweight productivity app designed for creatives and developer
 
 ### Screen 5
 ![Wireframe 5](./imgs/Wire5.png)
+
+## Sprint work!!!
+
+### Sprint 1
+
+#### Making/previewing a md
+
+<div>
+    <a href="https://www.loom.com/share/c2f4b641857e4f1b97e3cc3c732fd1d8">
+      <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/c2f4b641857e4f1b97e3cc3c732fd1d8-d22e6b3cfe292337-full-play.gif">
+    </a>
+  </div>
+
+#### Making of tests for back end!
+
+<div>
+    <a href="https://www.loom.com/share/c7b62120ef384f1881619319cd058c3f">
+      <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/c7b62120ef384f1881619319cd058c3f-d154debd75f47170-full-play.gif">
+    </a>
+  </div>
