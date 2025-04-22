@@ -39,6 +39,9 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		3813E2772DAF1C9F00BFBEDC /* TaskNoteIOS */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			explicitFolders = (
+				.xcassets,
+			);
 			path = TaskNoteIOS;
 			sourceTree = "<group>";
 		};

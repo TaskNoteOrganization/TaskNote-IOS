@@ -74,7 +74,7 @@ struct SettingsView: View {
                             Button(action: tempFunc) {
                                 Label("Delete Account", systemImage: "arrow.up").font(.title2)
                             }
-                            .buttonStyle(.bordered).tint(Color.red)
+                            .buttonStyle(.bordered).tint(darkMode ? Color.red : Color.main)
                             
                             Spacer()
                         }
@@ -93,6 +93,7 @@ struct SettingsView: View {
                 HomeNavBar()
             }
             .padding()
+            .background(darkMode ? Color.back : Color.red)
             
         }.navigationBarBackButtonHidden(true)
         
