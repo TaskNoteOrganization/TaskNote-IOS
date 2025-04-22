@@ -11,7 +11,8 @@ import MarkdownUI
 
 struct NoteCreateView: View {
     
-    @State private var noteTitle: String = ""
+    @State private var noteTitle: String = """
+"""
     @State private var noteText: String = ""
     @State private var isPreview: Bool = false
     
@@ -41,21 +42,48 @@ struct NoteCreateView: View {
                     Text(isPreview ? "Continue Editing" : "Preview")
                 }
                 Spacer()
-                Button(action: submit){
-                    Text("Submit")
+                Button(action: {
+                    _Concurrency.Task {
+                        await submit()
+                    }
+                }){
+                    Text("Submit").fontWeight(.semibold)
                 }
             }
         }
         .padding()
     }
     
-    func preview(){
+    private func preview(){
         isPreview.toggle()
     }
     
-    func submit(){
-        // TODO
-        return
+    private func submit() async {
+        // TODO:
+        // Code for empty title? / text
+        
+        // Package into data
+        /*var filename = ""
+        guard let data = noteText.data(using: .utf8) else {
+            print("ERROR: Encoding failed")
+            return
+        }
+        // Upload as md file
+        do {
+            let uuid = UUID()
+            filename = "\(uuid.uuidString).md"
+            let path = try await uploadMarkdownFile(data: data, filename: filename)
+        } catch {
+            print("Markdown upload failed: \(error)")
+        }
+        // Create note with path
+        do {
+            let uid = try await requireUserID()
+            try await createNote(title: noteTitle, path: "\(uid)/\(filename)")
+        } catch {
+            print("Note creation failed: \(error)")
+        }
+        return*/
     }
 }
 
