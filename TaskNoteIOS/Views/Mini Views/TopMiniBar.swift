@@ -10,13 +10,14 @@ import SwiftUI
 struct TopMiniBar: View {
     
     var someTitle : String
+    @State var darkMode : Bool
     
     var body: some View {
         
         ZStack {
-            Rectangle().foregroundStyle(Color.gray)
+            Rectangle().foregroundStyle(Color.bg2)
             
-            Text(someTitle).foregroundStyle(Color.white).fontWeight(.bold).font(.title)
+            Text(someTitle).foregroundStyle(Color.main).fontWeight(.bold).font(.title)
             
         }.frame(height: UIScreen.main.bounds.height * 0.08)
         
@@ -24,6 +25,6 @@ struct TopMiniBar: View {
 }
 
 #Preview {
-    TopMiniBar(someTitle: "Test")
+    TopMiniBar(someTitle: "Test", darkMode: true)
 }
 

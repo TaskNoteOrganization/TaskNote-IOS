@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct TaskListView: View {
+    
+    @State var darkMode : Bool
+    
     var body: some View {
         
         NavigationStack {
@@ -16,7 +19,7 @@ struct TaskListView: View {
                 
                 VStack {
                     
-                    TopMiniBar(someTitle: "Task and Notes List")
+                    TopMiniBar(someTitle: "Task and Notes List", darkMode: darkMode)
                     
                     VStack {
                         
@@ -53,7 +56,7 @@ struct TaskListView: View {
                     
                 }.frame(height: UIScreen.main.bounds.height * 0.8)
                 
-                HomeNavBar()
+                HomeNavBar(darkMode: darkMode)
             }
             .padding()
             
@@ -63,5 +66,5 @@ struct TaskListView: View {
 }
 
 #Preview {
-    TaskListView()
+    TaskListView(darkMode: true)
 }

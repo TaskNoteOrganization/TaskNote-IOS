@@ -9,5 +9,6 @@ import SwiftUI
 
 extension Color {
     static let base = Color("Main")
-    static let back = Color("Baackground")
+    static let bg = Color("Background")
+    static let bg2 = Color("Background2")
 }

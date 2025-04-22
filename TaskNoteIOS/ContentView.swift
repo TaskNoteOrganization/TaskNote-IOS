@@ -7,6 +7,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var darkMode: Bool = true
+    
     var body: some View {
         
         NavigationStack {
@@ -19,7 +22,7 @@ struct ContentView: View {
                 
                 // Spacer()
                 
-                HomeNavBar()
+                HomeNavBar(darkMode: darkMode)
             }
             .padding()
             

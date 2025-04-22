@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
     
-    @State private var darkMode : Bool = false
+    @State var darkMode : Bool
     
     var body: some View {
         
@@ -19,7 +19,7 @@ struct SettingsView: View {
                 
                 VStack {
                     
-                    TopMiniBar(someTitle: "Settings")
+                    TopMiniBar(someTitle: "Settings", darkMode: darkMode)
                     
                     VStack {
                         
@@ -74,7 +74,7 @@ struct SettingsView: View {
                             Button(action: tempFunc) {
                                 Label("Delete Account", systemImage: "arrow.up").font(.title2)
                             }
-                            .buttonStyle(.bordered).tint(darkMode ? Color.red : Color.main)
+                            .buttonStyle(.bordered).tint(Color.main)
                             
                             Spacer()
                         }
@@ -90,12 +90,13 @@ struct SettingsView: View {
                 
                 // Spacer()
                 
-                HomeNavBar()
+                HomeNavBar(darkMode: darkMode)
             }
             .padding()
-            .background(darkMode ? Color.back : Color.red)
+            .background(Color.bg)
             
         }.navigationBarBackButtonHidden(true)
+            .preferredColorScheme(darkMode ? .dark : .light)
         
     }
 }
@@ -105,5 +106,5 @@ func tempFunc() {
 }
 
 #Preview {
-    SettingsView()
+    SettingsView(darkMode: true)
 }
