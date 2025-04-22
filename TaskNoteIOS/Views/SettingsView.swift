@@ -31,6 +31,8 @@ struct SettingsView: View {
                                 Label("Log out", systemImage: "arrow.up").font(.title2)
                             }
                             .buttonStyle(.bordered)
+                            .background(Color.bg2)
+                            .foregroundStyle(Color.main)
                             
                             Spacer()
                         }
@@ -41,6 +43,8 @@ struct SettingsView: View {
                                 Label("Change Password", systemImage: "arrow.up").font(.title2)
                             }
                             .buttonStyle(.bordered)
+                            .background(Color.bg2)
+                            .foregroundStyle(Color.main)
                             
                             Spacer()
                         }
@@ -51,6 +55,8 @@ struct SettingsView: View {
                                 Label("Change Username", systemImage: "arrow.up").font(.title2)
                             }
                             .buttonStyle(.bordered)
+                            .background(Color.bg2)
+                            .foregroundStyle(Color.main)
                             
                             Spacer()
                         }
@@ -58,9 +64,11 @@ struct SettingsView: View {
                         HStack {
                             
                             Button(action: tempFunc) {
-                                Label("Change Emai", systemImage: "arrow.up").font(.title2)
+                                Label("Change Email", systemImage: "arrow.up").font(.title2)
                             }
                             .buttonStyle(.bordered)
+                            .background(Color.bg2)
+                            .foregroundStyle(Color.main)
                             
                             Spacer()
                         }
@@ -93,7 +101,7 @@ struct SettingsView: View {
                 HomeNavBar(darkMode: darkMode)
             }
             .padding()
-            .background(Color.bg)
+            .background(Color.bg3)
             
         }.navigationBarBackButtonHidden(true)
             .preferredColorScheme(darkMode ? .dark : .light)

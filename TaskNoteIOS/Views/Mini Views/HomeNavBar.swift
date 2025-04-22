@@ -18,7 +18,7 @@ struct HomeNavBar: View {
             ZStack
             {
                 RoundedRectangle(cornerRadius: 10.0)
-                    .foregroundStyle(Color.gray)
+                    .foregroundStyle(Color.bg2)
                 
                 HStack {
                     
@@ -29,11 +29,11 @@ struct HomeNavBar: View {
                         ZStack {
                             
                             RoundedRectangle(cornerRadius: 10.0)
-                                .foregroundStyle(Color.pink)
+                                .foregroundStyle(Color.mainOpposite)
                             
                             Image(systemName: "house")
                                 .imageScale(.large)
-                                .foregroundStyle(Color.white)
+                                .foregroundStyle(Color.main)
                             
                         }
                         
@@ -46,11 +46,11 @@ struct HomeNavBar: View {
                         ZStack {
                             
                             RoundedRectangle(cornerRadius: 10.0)
-                                .foregroundStyle(Color.pink)
+                                .foregroundStyle(Color.mainOpposite)
                             
                             Image(systemName: "checkmark.square")
                                 .imageScale(.large)
-                                .foregroundStyle(Color.white)
+                                .foregroundStyle(Color.main)
                             
                         }
                         
@@ -64,11 +64,11 @@ struct HomeNavBar: View {
                         ZStack {
                             
                             RoundedRectangle(cornerRadius: 10.0)
-                                .foregroundStyle(Color.pink)
+                                .foregroundStyle(Color.mainOpposite)
                             
                             Image(systemName: "gear")
                                 .imageScale(.large)
-                                .foregroundStyle(Color.white)
+                                .foregroundStyle(Color.main)
                             
                             
                         }
