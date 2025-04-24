@@ -63,7 +63,7 @@ struct NoteCreateView: View {
         // Code for empty title? / text
         
         // Package into data
-        /*var filename = ""
+        var filename = ""
         guard let data = noteText.data(using: .utf8) else {
             print("ERROR: Encoding failed")
             return
@@ -72,18 +72,18 @@ struct NoteCreateView: View {
         do {
             let uuid = UUID()
             filename = "\(uuid.uuidString).md"
-            let path = try await uploadMarkdownFile(data: data, filename: filename)
+            let path = try await SupabaseService.shared.uploadMarkdownFile(data: data, filename: filename)
         } catch {
             print("Markdown upload failed: \(error)")
         }
         // Create note with path
         do {
-            let uid = try await requireUserID()
-            try await createNote(title: noteTitle, path: "\(uid)/\(filename)")
+            let uid = try await SupabaseService.shared.getCurrentUser()!
+            _ = try await SupabaseService.shared.createNote(title: noteTitle, path: "\(uid)/\(filename)")
         } catch {
             print("Note creation failed: \(error)")
         }
-        return*/
+        return
     }
 }
 
