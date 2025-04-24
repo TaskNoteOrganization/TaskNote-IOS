@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		006103F12DB1BC3500CDA9B9 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 006103F02DB1BC3500CDA9B9 /* MarkdownUI */; };
 		3813E2BF2DAF376A00BFBEDC /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = 3813E2BE2DAF376A00BFBEDC /* Auth */; };
 		3813E2C12DAF376A00BFBEDC /* PostgREST in Frameworks */ = {isa = PBXBuildFile; productRef = 3813E2C02DAF376A00BFBEDC /* PostgREST */; };
 		3813E2C32DAF376A00BFBEDC /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = 3813E2C22DAF376A00BFBEDC /* Storage */; };
@@ -39,9 +40,6 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		3813E2772DAF1C9F00BFBEDC /* TaskNoteIOS */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			explicitFolders = (
-				.xcassets,
-			);
 			path = TaskNoteIOS;
 			sourceTree = "<group>";
 		};
@@ -66,6 +64,7 @@
 				3813E2C32DAF376A00BFBEDC /* Storage in Frameworks */,
 				3813E2C12DAF376A00BFBEDC /* PostgREST in Frameworks */,
 				3813E2BF2DAF376A00BFBEDC /* Auth in Frameworks */,
+				006103F12DB1BC3500CDA9B9 /* MarkdownUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,6 +129,7 @@
 				3813E2C02DAF376A00BFBEDC /* PostgREST */,
 				3813E2C22DAF376A00BFBEDC /* Storage */,
 				3813E2C42DAF376A00BFBEDC /* Supabase */,
+				006103F02DB1BC3500CDA9B9 /* MarkdownUI */,
 			);
 			productName = TaskNoteIOS;
 			productReference = 3813E2752DAF1C9F00BFBEDC /* TaskNoteIOS.app */;
@@ -215,6 +215,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				3813E2BD2DAF376A00BFBEDC /* XCRemoteSwiftPackageReference "supabase-swift" */,
+				006103EF2DB1BC3500CDA9B9 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 3813E2762DAF1C9F00BFBEDC /* Products */;
@@ -417,7 +418,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TaskNoteIOS/Preview Content\"";
-				DEVELOPMENT_TEAM = GTXJQLPKBA;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -425,6 +426,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -446,7 +448,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TaskNoteIOS/Preview Content\"";
-				DEVELOPMENT_TEAM = GTXJQLPKBA;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -454,6 +456,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -581,6 +584,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		006103EF2DB1BC3500CDA9B9 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/gonzalezreal/swift-markdown-ui";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.4.1;
+			};
+		};
 		3813E2BD2DAF376A00BFBEDC /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/supabase/supabase-swift";
@@ -592,6 +603,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		006103F02DB1BC3500CDA9B9 /* MarkdownUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 006103EF2DB1BC3500CDA9B9 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
+			productName = MarkdownUI;
+		};
 		3813E2BE2DAF376A00BFBEDC /* Auth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3813E2BD2DAF376A00BFBEDC /* XCRemoteSwiftPackageReference "supabase-swift" */;
