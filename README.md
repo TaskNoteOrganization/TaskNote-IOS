@@ -114,3 +114,9 @@ TaskNotes is a lightweight productivity app designed for creatives and developer
       <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/c7b62120ef384f1881619319cd058c3f-d154debd75f47170-full-play.gif">
     </a>
   </div>
+
+### Sprint 2
+
+#### Sprint 2 report
+
+[![Video Title](https://img.youtube.com/vi/z0jKObNgwR8/0.jpg)](https://www.youtube.com/watch?v=z0jKObNgwR8)
