@@ -26,9 +26,9 @@ struct NoteCreateView: View {
                         .frame(height: 500.0, alignment: .top).monospaced()
                         .keyboardType(.asciiCapable).font(.system(size: 15))
                         .overlay(
-                                RoundedRectangle(cornerRadius: 5)
-                                    .stroke(Color.gray, lineWidth: 2)
-                            )
+                            RoundedRectangle(cornerRadius: 5)
+                                .stroke(Color.gray, lineWidth: 2)
+                        )
                 }.opacity(isPreview ? 0 : 1)
                 // The Markdown preview
                 VStack {
@@ -72,7 +72,7 @@ struct NoteCreateView: View {
         do {
             let uuid = UUID()
             filename = "\(uuid.uuidString).md"
-            let path = try await SupabaseService.shared.uploadMarkdownFile(data: data, filename: filename)
+            let _ = try await SupabaseService.shared.uploadMarkdownFile(data: data, filename: filename)
         } catch {
             print("Markdown upload failed: \(error)")
         }
