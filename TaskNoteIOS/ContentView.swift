@@ -12,26 +12,11 @@ class ColorSettings: ObservableObject {
 
 struct ContentView: View {
     
-    @EnvironmentObject var darkMode: ColorSettings
+    @StateObject var darkMode = ColorSettings()
     
     var body: some View {
         
-        NavigationStack {
-            
-            VStack {
-                Image(systemName: "globe")
-                    .imageScale(.large)
-                    .foregroundStyle(.tint)
-                Text("Hello, world!")
-                
-                // Spacer()
-                
-                HomeNavBar()
-            }
-            .padding()
-            
-        }
-        .environmentObject(ColorSettings())
+        NoteListView()
     }
 }
 

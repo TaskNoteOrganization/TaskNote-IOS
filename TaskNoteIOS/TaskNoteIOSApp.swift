@@ -8,6 +8,9 @@ import SwiftUI
 
 @main
 struct TaskNoteIOSApp: App {
+    
+    @StateObject var darkMode = ColorSettings()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
