@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeNavBar: View {
     
-    @State var darkMode : Bool
+    @EnvironmentObject var darkMode: ColorSettings
     
     var body: some View {
         
@@ -24,7 +24,7 @@ struct HomeNavBar: View {
                     
                     Spacer()
                     
-                    NavigationLink{NoteListView(darkMode: darkMode)} label: {
+                    NavigationLink{NoteListView()} label: {
                         
                         ZStack {
                             
@@ -41,7 +41,7 @@ struct HomeNavBar: View {
                     
                     Spacer()
                     
-                    NavigationLink{TaskListView(darkMode: darkMode)} label: {
+                    NavigationLink{TaskListView()} label: {
                         
                         ZStack {
                             
@@ -59,7 +59,7 @@ struct HomeNavBar: View {
                     
                     Spacer()
                     
-                    NavigationLink{SettingsView(darkMode: darkMode)} label: {
+                    NavigationLink{SettingsView()} label: {
                         
                         ZStack {
                             
@@ -82,11 +82,12 @@ struct HomeNavBar: View {
                 
             }.frame(width: (UIScreen.main.bounds.width * 0.95), height: UIScreen.main.bounds.height * 0.1)
         }
+        .environmentObject(ColorSettings())
         
     }
     
 }
 
 #Preview {
-    HomeNavBar(darkMode: true)
+    HomeNavBar()
 }

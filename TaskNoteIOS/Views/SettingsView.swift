@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
     
-    @State var darkMode : Bool
+    @EnvironmentObject var darkMode : ColorSettings
     
     var body: some View {
         
@@ -19,7 +19,7 @@ struct SettingsView: View {
                 
                 VStack {
                     
-                    TopMiniBar(someTitle: "Settings", darkMode: darkMode)
+                    TopMiniBar(someTitle: "Settings")
                     
                     VStack {
                         
@@ -73,7 +73,7 @@ struct SettingsView: View {
                             Spacer()
                         }
                         
-                        Toggle("Dark Mode", isOn: $darkMode).font(.title2)
+                        Toggle("Dark Mode", isOn: $darkMode.darkMode).font(.title2)
                         
                         Spacer()
                         
@@ -98,13 +98,14 @@ struct SettingsView: View {
                 
                 // Spacer()
                 
-                HomeNavBar(darkMode: darkMode)
+                HomeNavBar()
             }
             .padding()
             .background(Color.bg3)
             
         }.navigationBarBackButtonHidden(true)
-            .preferredColorScheme(darkMode ? .dark : .light)
+            .preferredColorScheme(darkMode.darkMode ? .dark : .light)
+            .environmentObject(ColorSettings())
         
     }
 }
@@ -114,5 +115,5 @@ func tempFunc() {
 }
 
 #Preview {
-    SettingsView(darkMode: true)
+    SettingsView()
 }

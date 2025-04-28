@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NoteListView: View {
     
-    @State var darkMode : Bool
+    @EnvironmentObject var darkMode: ColorSettings
     
     var body: some View {
         
@@ -19,7 +19,7 @@ struct NoteListView: View {
                 
                 VStack {
                     
-                    TopMiniBar(someTitle: "Note List", darkMode: darkMode)
+                    TopMiniBar(someTitle: "Note List")
                     
                     Image(systemName: "globe")
                         .imageScale(.large)
@@ -34,15 +34,16 @@ struct NoteListView: View {
                 
                 // Spacer()
                 
-                HomeNavBar(darkMode: darkMode)
+                HomeNavBar()
             }
             .padding()
             
         }.navigationBarBackButtonHidden(true)
+            .environmentObject(ColorSettings())
 
     }
 }
 
 #Preview {
-    NoteListView(darkMode: true)
+    NoteListView()
 }

@@ -10,7 +10,7 @@ import SwiftUI
 struct TopMiniBar: View {
     
     var someTitle : String
-    @State var darkMode : Bool
+    @EnvironmentObject var darkMode: ColorSettings
     
     var body: some View {
         
@@ -20,11 +20,12 @@ struct TopMiniBar: View {
             Text(someTitle).foregroundStyle(Color.main).fontWeight(.bold).font(.title)
             
         }.frame(height: UIScreen.main.bounds.height * 0.08)
+            .environmentObject(ColorSettings())
         
     }
 }
 
 #Preview {
-    TopMiniBar(someTitle: "Test", darkMode: true)
+    TopMiniBar(someTitle: "Test")
 }
 

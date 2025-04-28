@@ -6,9 +6,13 @@
 //
 import SwiftUI
 
+class ColorSettings: ObservableObject {
+    @Published var darkMode : Bool = true
+}
+
 struct ContentView: View {
     
-    @State var darkMode: Bool = true
+    @EnvironmentObject var darkMode: ColorSettings
     
     var body: some View {
         
@@ -22,11 +26,12 @@ struct ContentView: View {
                 
                 // Spacer()
                 
-                HomeNavBar(darkMode: darkMode)
+                HomeNavBar()
             }
             .padding()
             
         }
+        .environmentObject(ColorSettings())
     }
 }
 

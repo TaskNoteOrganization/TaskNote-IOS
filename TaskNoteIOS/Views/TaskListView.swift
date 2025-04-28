@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TaskListView: View {
     
-    @State var darkMode : Bool
+    @EnvironmentObject var darkMode: ColorSettings
     
     var body: some View {
         
@@ -19,7 +19,7 @@ struct TaskListView: View {
                 
                 VStack {
                     
-                    TopMiniBar(someTitle: "Task and Notes List", darkMode: darkMode)
+                    TopMiniBar(someTitle: "Task and Notes List")
                     
                     VStack {
                         
@@ -56,15 +56,16 @@ struct TaskListView: View {
                     
                 }.frame(height: UIScreen.main.bounds.height * 0.8)
                 
-                HomeNavBar(darkMode: darkMode)
+                HomeNavBar()
             }
             .padding()
             
         }.navigationBarBackButtonHidden(true)
+            .environmentObject(ColorSettings())
 
     }
 }
 
 #Preview {
-    TaskListView(darkMode: true)
+    TaskListView()
 }
