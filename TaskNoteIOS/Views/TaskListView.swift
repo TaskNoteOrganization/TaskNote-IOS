@@ -61,7 +61,7 @@ struct TaskListView: View {
             .padding()
             
         }.navigationBarBackButtonHidden(true)
-
+        
     }
 }
 

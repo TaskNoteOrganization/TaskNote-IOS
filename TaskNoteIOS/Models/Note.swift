@@ -42,3 +42,29 @@ public struct Note: Codable, Identifiable {
         return try JSONDecoder.supabaseDecoder.decode(Note.self, from: data)
     }
 }
+
+extension Note {
+    static let mockNotes: [Note] = [
+        Note(
+            id: UUID(uuidString: "11111111-1111-1111-1111-111111111111")!,
+            userId: UUID(uuidString: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa")!,
+            title: "First Note",
+            filePath: "tasknotes-notes/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa/first-note.md",
+            createdAt: Date(timeIntervalSince1970: 1_700_000_000) // Jan 2024
+        ),
+        Note(
+            id: UUID(uuidString: "22222222-2222-2222-2222-222222222222")!,
+            userId: UUID(uuidString: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb")!,
+            title: "Second Note",
+            filePath: "tasknotes-notes/bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb/second-note.md",
+            createdAt: Date(timeIntervalSince1970: 1_705_000_000) // Feb 2024
+        ),
+        Note(
+            id: UUID(uuidString: "33333333-3333-3333-3333-333333333333")!,
+            userId: UUID(uuidString: "cccccccc-cccc-cccc-cccc-cccccccccccc")!,
+            title: nil, // No title
+            filePath: "tasknotes-notes/cccccccc-cccc-cccc-cccc-cccccccccccc/untitled-note.md",
+            createdAt: Date(timeIntervalSince1970: 1_710_000_000) // March 2024
+        )
+    ]
+}
