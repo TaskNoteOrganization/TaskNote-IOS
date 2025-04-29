@@ -11,6 +11,8 @@ struct TaskListView: View {
     
     @EnvironmentObject var colorMode: ColorSettings
     
+    @State var someNoteList : [Note]
+    
     var body: some View {
         
         NavigationStack {
@@ -46,8 +48,10 @@ struct TaskListView: View {
                             
                         }
                         
-                        ScrollView {
-                            
+                        ScrollView{
+                            ForEach(someNoteList) { element in
+                                NoteButton(someNote: element)
+                            }
                         }
                         
                     }
@@ -68,6 +72,6 @@ struct TaskListView: View {
 }
 
 #Preview {
-    TaskListView()
+    TaskListView(someNoteList: Note.mockNotes)
         .environmentObject(ColorSettings(previewing : true))
 }

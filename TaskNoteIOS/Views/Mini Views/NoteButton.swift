@@ -16,13 +16,32 @@ struct NoteButton: View {
     var body: some View {
         
         HStack {
+            Spacer()
             ZStack {
                 Rectangle().foregroundStyle(Color.bg3)
                 
-                Text(someNote.title ?? "some error").foregroundStyle(Color.main).fontWeight(.bold).font(.title3)
+                HStack{
+                    
+                    Spacer()
+                    
+                    Text(someNote.title ?? "some error").foregroundStyle(Color.main).fontWeight(.bold).font(.title3)
+                    
+                    Spacer()
+                    Spacer()
+                    Spacer()
+                    Spacer()
+                    Spacer()
+                    Spacer()
+                    
+                }
                 
-            }.frame(height: UIScreen.main.bounds.height * 0.06)
+            }.frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.06)
                 .environmentObject(ColorSettings())
+            Spacer()
+            Spacer()
+            Spacer()
+            Spacer()
+            Spacer()
             Spacer()
         }
         

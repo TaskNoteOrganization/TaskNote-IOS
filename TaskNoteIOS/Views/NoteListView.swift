@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NoteListView: View {
     
-    var someNoteList : [Note]
+    @State var someNoteList : [Note]
     @EnvironmentObject var colorMode: ColorSettings
     
     var body: some View {
@@ -22,8 +22,10 @@ struct NoteListView: View {
                     
                     TopMiniBar(someTitle: "Note List")
                     
-                    ForEach(someNoteList) { element in
-                        NoteButton(someNote: element)
+                    ScrollView {
+                        ForEach(someNoteList) { element in
+                            NoteButton(someNote: element)
+                        }
                     }
                     
                     Spacer()
