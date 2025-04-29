@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NoteListView: View {
     
-    @EnvironmentObject var darkMode: ColorSettings
+    @EnvironmentObject var colorMode: ColorSettings
     
     var body: some View {
         
@@ -47,4 +47,5 @@ struct NoteListView: View {
 
 #Preview {
     NoteListView()
+        .environmentObject(ColorSettings(previewing : true))
 }

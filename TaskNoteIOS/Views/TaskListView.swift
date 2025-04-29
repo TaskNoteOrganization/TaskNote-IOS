@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TaskListView: View {
     
-    @EnvironmentObject var darkMode: ColorSettings
+    @EnvironmentObject var colorMode: ColorSettings
     
     var body: some View {
         
@@ -69,4 +69,5 @@ struct TaskListView: View {
 
 #Preview {
     TaskListView()
+        .environmentObject(ColorSettings(previewing : true))
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeNavBar: View {
     
-    @EnvironmentObject var darkMode: ColorSettings
+    @EnvironmentObject var colorMode: ColorSettings
     
     var body: some View {
         
@@ -90,4 +90,5 @@ struct HomeNavBar: View {
 
 #Preview {
     HomeNavBar()
+        .environmentObject(ColorSettings(previewing : true))
 }

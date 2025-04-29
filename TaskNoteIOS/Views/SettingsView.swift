@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
     
-    @EnvironmentObject var darkMode : ColorSettings
+    @EnvironmentObject var colorMode : ColorSettings
     
     var body: some View {
         
@@ -73,7 +73,7 @@ struct SettingsView: View {
                             Spacer()
                         }
                         
-                        Toggle("Dark Mode", isOn: $darkMode.darkMode).font(.title2)
+                        Toggle("Dark Mode", isOn: $colorMode.darkMode).font(.title2)
                         
                         Spacer()
                         
@@ -104,7 +104,7 @@ struct SettingsView: View {
             .background(Color.bg3)
             
         }.navigationBarBackButtonHidden(true)
-            .preferredColorScheme(darkMode.darkMode ? .dark : .light)
+            .preferredColorScheme(colorMode.darkMode ? .dark : .light)
             .environmentObject(ColorSettings())
         
     }
@@ -116,4 +116,5 @@ func tempFunc() {
 
 #Preview {
     SettingsView()
+        .environmentObject(ColorSettings(previewing : true))
 }

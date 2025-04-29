@@ -8,11 +8,17 @@ import SwiftUI
 
 class ColorSettings: ObservableObject {
     @Published var darkMode : Bool = true
+    
+    init(previewing: Bool = false) {
+        if previewing {
+            darkMode = true
+        }
+    }
 }
 
 struct ContentView: View {
     
-    @StateObject var darkMode = ColorSettings()
+    @StateObject var colorMode = ColorSettings()
     
     var body: some View {
         
