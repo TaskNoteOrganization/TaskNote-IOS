@@ -59,7 +59,7 @@ struct TaskListView: View {
                 HomeNavBar()
             }
             .padding()
-            .background(Color.bg3)
+            .background(Color.bg4)
             
         }.navigationBarBackButtonHidden(true)
             .environmentObject(ColorSettings())
