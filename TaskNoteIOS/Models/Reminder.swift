@@ -35,8 +35,29 @@ public struct Reminder: Codable, Identifiable {
     /// - Returns: A decoded `Reminder` object
     public static func decodeReminder(from json: String) throws -> Reminder {
         let data = json.data(using: .utf8)!
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
         return try JSONDecoder.supabaseDecoder.decode(Reminder.self, from: data)
     }
+}
+
+extension Reminder {
+    static let mockReminders: [Reminder] = [
+        Reminder(
+            id: UUID(uuidString: "77777777-7777-7777-7777-777777777777")!,
+            taskId: UUID(uuidString: "44444444-4444-4444-4444-444444444444")!,
+            remindAt: Date(timeIntervalSince1970: 1_700_600_000), // 1 hour after first task creation
+            isSent: false
+        ),
+        Reminder(
+            id: UUID(uuidString: "88888888-8888-8888-8888-888888888888")!,
+            taskId: UUID(uuidString: "55555555-5555-5555-5555-555555555555")!,
+            remindAt: Date(timeIntervalSince1970: 1_700_800_000),
+            isSent: true
+        ),
+        Reminder(
+            id: UUID(uuidString: "99999999-9999-9999-9999-999999999999")!,
+            taskId: UUID(uuidString: "66666666-6666-6666-6666-666666666666")!,
+            remindAt: Date(timeIntervalSince1970: 1_701_000_000),
+            isSent: false
+        )
+    ]
 }

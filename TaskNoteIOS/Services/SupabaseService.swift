@@ -31,11 +31,13 @@ public final class SupabaseService {
     // MARK: - Models
     
     public func fetchTasks() async throws -> [Task] {
-        try await client
+        let response = try await client
             .from("tasks")
             .select()
             .execute()
-            .value
+        
+        let data = response.data
+        return try JSONDecoder.supabaseDecoder.decode([Task].self, from: data)
     }
     
     func fetchNotes() async throws -> [Note] {
@@ -46,6 +48,56 @@ public final class SupabaseService {
         
         let data = response.data
         return try JSONDecoder.supabaseDecoder.decode([Note].self, from: data)
+    }
+    
+    func fetchReminders() async throws -> [Reminder] {
+        let response = try await client
+            .from("reminders_view")
+            .select()
+            .execute()
+        
+        let data = response.data
+        return try JSONDecoder.supabaseDecoder.decode([Reminder].self, from: data)
+    }
+    
+    func fetchUserID() async throws -> UUID {
+        guard let user = try await getCurrentUser() else {
+            fatalError("No user signed in")
+        }
+        
+        return user.id
+    }
+    
+    func fetchNoteTaskLinks() async throws -> [NoteTaskLink] {
+        let response = try await client
+            .from("note_task_links")
+            .select()
+            .execute()
+        
+        let data = response.data
+        return try JSONDecoder.supabaseDecoder.decode([NoteTaskLink].self, from: data)
+    }
+    
+    func fetchNoteTaskLinksFromNote(noteID: UUID) async throws -> [NoteTaskLink] {
+        let response = try await client
+            .from("note_task_links")
+            .select()
+            .eq("note_id", value: noteID.uuidString)
+            .execute()
+        
+        let data = response.data
+        return try JSONDecoder.supabaseDecoder.decode([NoteTaskLink].self, from: data)
+    }
+    
+    func fetchRemindersFromTask(taskID: UUID) async throws -> [Reminder] {
+        let response = try await client
+            .from("reminders_view")
+            .select()
+            .eq("task_id", value: taskID.uuidString)
+            .execute()
+        
+        let data = response.data
+        return try JSONDecoder.supabaseDecoder.decode([Reminder].self, from: data)
     }
     
     public func createNote(title: String, path: String) async throws -> Note {
@@ -64,6 +116,55 @@ public final class SupabaseService {
             .value as Note
         
         return newNote
+    }
+    
+    public func createTask(title: String) async throws -> Task {
+        let uid = try requireUserID()
+        
+        let newTask = try await client
+            .from("tasks")
+            .insert([
+                "user_id": uid,
+                "title": title
+            ])
+            .select()
+            .single()
+            .execute()
+            .value as Task
+        
+        return newTask
+    }
+    
+    public func createTaskLink(taskID: UUID, noteID: UUID) async throws -> NoteTaskLink {
+        let newLink = try await client
+            .from("note_task_links")
+            .insert([
+                "task_id": taskID,
+                "note_id": noteID
+            ])
+            .select()
+            .single()
+            .execute()
+            .value as NoteTaskLink
+        return newLink
+    }
+    
+    public func createReminder(taskID: UUID, time: Date) async throws -> Reminder {
+        let formatter = ISO8601DateFormatter()
+        
+        let newReminder = try await client
+            .from("reminders")
+            .insert([
+                "task_id": taskID.uuidString,
+                "remind_at": formatter.string(from: time),
+                "is_sent": "false"
+            ])
+            .select()
+            .single()
+            .execute()
+            .value as Reminder
+        
+        return newReminder
     }
     
     // MARK: - Storage
@@ -90,8 +191,16 @@ public final class SupabaseService {
     
     public func debugPrintCurrentUser() {
         let uid = client.auth.currentUser?.id.uuidString ?? "nil"
-        print("👤 Current signed-in user ID: \(uid)")
+        print("Current signed-in user ID: \(uid)")
     }
+    
+    
+    // MARK: - OAuth Login
+    public func signInWithOAuth(provider: Provider) async throws -> Session {
+        let session = try await client.auth.signInWithOAuth(provider: provider)
+        return session
+    }
+    
     
     private init() {}
     private let supabaseUrl = URL(string: "https://fzlwnrnfreklyainlfpy.supabase.co")!
@@ -114,46 +223,23 @@ public final class SupabaseService {
 extension JSONDecoder {
     static let supabaseDecoder: JSONDecoder = {
         let decoder = JSONDecoder()
+        let isoFormatter = ISO8601DateFormatter()
+        isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        isoFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+        
         decoder.dateDecodingStrategy = .custom { decoder in
             let container = try decoder.singleValueContainer()
             let dateStr = try container.decode(String.self)
-            
-            
-            let formats: [DateFormatter] = [
-                .supabaseVariableSubsecondFormatter,
-                .supabaseFixedMicrosecondFormatter
-            ]
-            
-            for formatter in formats {
-                if let date = formatter.date(from: dateStr) {
-                    return date
-                }
+            if let date = isoFormatter.date(from: dateStr) {
+                return date
+            } else {
+                throw DecodingError.dataCorruptedError(
+                    in: container,
+                    debugDescription: "Expected ISO8601 date with fractional seconds: \(dateStr)"
+                )
             }
-            
-            throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid Supabase ISO8601 date: \(dateStr)")
         }
         return decoder
-    }()
-}
-
-
-extension DateFormatter {
-    /// Strict formatter for Supabase (fixed 6-digit microseconds + timezone)
-    static let supabaseFixedMicrosecondFormatter: DateFormatter = {
-        let f = DateFormatter()
-        f.locale = Locale(identifier: "en_US_POSIX")
-        f.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSXXXXX"
-        f.timeZone = TimeZone(secondsFromGMT: 0)
-        return f
-    }()
-    
-    /// More tolerant formatter for Supabase (handles variable subseconds)
-    static let supabaseVariableSubsecondFormatter: DateFormatter = {
-        let f = DateFormatter()
-        f.locale = Locale(identifier: "en_US_POSIX")
-        f.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX" // handles 3–6 digit fractions
-        f.timeZone = TimeZone(secondsFromGMT: 0)
-        return f
     }()
 }
 

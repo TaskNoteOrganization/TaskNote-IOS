@@ -12,11 +12,15 @@ import Testing
 @Suite("Reminder Model Tests")
 struct ReminderTests {
     
-    private var formatter: DateFormatter {
-        DateFormatter.supabaseFixedMicrosecondFormatter
+    private var formatter: ISO8601DateFormatter {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        return formatter
     }
+
     
-    @Test("Valid reminder decoding")
+    @Test("Reminder Model - Valid reminder decoding")
     func validReminderTest() throws {
         let json = """
         {
@@ -31,7 +35,7 @@ struct ReminderTests {
         #expect(reminder.isSent == false)
     }
     
-    @Test("Missing taskId should fail")
+    @Test("Reminder Model - Missing taskId should fail")
     func missingTaskIdTest() {
         let json = """
         {
@@ -49,7 +53,7 @@ struct ReminderTests {
         }
     }
     
-    @Test("Missing remindAt should fail")
+    @Test("Reminder Model - Missing remindAt should fail")
     func missingRemindAtTest() {
         let json = """
         {
@@ -67,7 +71,7 @@ struct ReminderTests {
         }
     }
     
-    @Test("Missing isSent should fail")
+    @Test("Reminder Model - Missing isSent should fail")
     func missingIsSentTest() {
         let json = """
         {

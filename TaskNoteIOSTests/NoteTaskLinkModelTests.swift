@@ -12,25 +12,29 @@ import Testing
 @Suite("NoteTaskLink Model Tests")
 struct NoteTaskLinkTests {
     
-    @Test("Valid link decoding")
+    @Test("NoteTaskLink Model - Valid link decoding")
     func validLinkTest() throws {
+        let noteUUID = UUID()
+        let taskUUID = UUID()
+        
         let json = """
         {
-            "note_id": 1,
-            "task_id": 42
+            "note_id": "\(noteUUID.uuidString)",
+            "task_id": "\(taskUUID.uuidString)"
         }
         """
         let data = json.data(using: .utf8)!
         let link = try JSONDecoder.supabaseDecoder.decode(NoteTaskLink.self, from: data)
-        #expect(link.noteId == 1)
-        #expect(link.taskId == 42)
+        
+        #expect(link.noteId == noteUUID)
+        #expect(link.taskId == taskUUID)
     }
     
-    @Test("Missing note_id should fail")
+    @Test("NoteTaskLink Model - Missing note_id should fail")
     func missingNoteIdTest() {
         let json = """
         {
-            "task_id": 42
+            "task_id": "\(UUID().uuidString)"
         }
         """
         let data = json.data(using: .utf8)!
@@ -42,12 +46,12 @@ struct NoteTaskLinkTests {
         }
     }
     
-    @Test("Null note_id should fail")
+    @Test("NoteTaskLink Model - Null note_id should fail")
     func nullNoteIdTest() {
         let json = """
         {
             "note_id": null,
-            "task_id": 42
+            "task_id": "\(UUID().uuidString)"
         }
         """
         let data = json.data(using: .utf8)!
@@ -59,11 +63,11 @@ struct NoteTaskLinkTests {
         }
     }
     
-    @Test("Missing task_id should fail")
+    @Test("NoteTaskLink Model - Missing task_id should fail")
     func missingTaskIdTest() {
         let json = """
         {
-            "note_id": 99
+            "note_id": "\(UUID().uuidString)"
         }
         """
         let data = json.data(using: .utf8)!
