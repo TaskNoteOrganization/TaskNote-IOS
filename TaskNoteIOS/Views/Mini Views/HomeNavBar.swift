@@ -41,7 +41,7 @@ struct HomeNavBar: View {
                     
                     Spacer()
                     
-                    NavigationLink{TaskListView(someNoteList: Note.mockNotes)} label: {
+                    NavigationLink{TaskListView(someNoteList: Note.mockNotes, someTaskList: Task.mockTasks)} label: {
                         
                         ZStack {
                             
