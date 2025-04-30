@@ -6,27 +6,23 @@
 //
 import SwiftUI
 
+class ColorSettings: ObservableObject {
+    @Published var darkMode : Bool = true
+    
+    init(previewing: Bool = false) {
+        if previewing {
+            darkMode = true
+        }
+    }
+}
+
 struct ContentView: View {
     
-    @State var darkMode: Bool = true
+    @StateObject var colorMode = ColorSettings()
     
     var body: some View {
         
-        NavigationStack {
-            
-            VStack {
-                Image(systemName: "globe")
-                    .imageScale(.large)
-                    .foregroundStyle(.tint)
-                Text("Hello, world!")
-                
-                // Spacer()
-                
-                HomeNavBar(darkMode: darkMode)
-            }
-            .padding()
-            
-        }
+        NoteListView()
     }
 }
 
