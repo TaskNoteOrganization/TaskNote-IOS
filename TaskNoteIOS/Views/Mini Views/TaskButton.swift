@@ -24,7 +24,10 @@ struct TaskButton: View {
                     
                     Spacer()
                     
-                    Text(someTask.title).foregroundStyle(Color.main).fontWeight(.bold).font(.title3)
+                    HStack {
+                        Text(someTask.title).foregroundStyle(Color.main).fontWeight(.bold).font(.title3)
+                        Spacer()
+                    }.frame(width: UIScreen.main.bounds.width * 0.5, height: UIScreen.main.bounds.height * 0.05)
                     
                     Spacer()
                     Spacer()
@@ -68,8 +71,12 @@ struct TaskStatusIcon: View {
 func getStatusIcon(someString : String) -> String {
     
     switch someString {
-//    case <#pattern#>:
-//        <#code#>
+    case "in_progress":
+        return "hare.fill"
+    case "pending":
+        return "clock.fill"
+    case "completed":
+        return "checkmark.circle.fill"
     default:
         return "questionmark.circle"
     }
