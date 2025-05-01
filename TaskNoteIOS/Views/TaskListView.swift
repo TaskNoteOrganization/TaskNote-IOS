@@ -36,7 +36,9 @@ struct TaskListView: View {
                         ScrollView
                         {
                             ForEach(someTaskList) { element in
-                                TaskButton(someTask: element)
+                                
+                                NavigationLink(destination: TaskView(someTask: element), label: {TaskButton(someTask: element)})
+                                
                             }
                         }.frame(height: UIScreen.main.bounds.height * 0.3)
                         
@@ -55,6 +57,7 @@ struct TaskListView: View {
                             ForEach(someNoteList) { element in
                                 
                                 NavigationLink(destination: NoteView(someNote: element), label: { NoteButton(someNote: element)} )
+                                
                             }
                         }
                         

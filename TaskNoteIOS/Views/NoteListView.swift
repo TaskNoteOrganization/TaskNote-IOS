@@ -24,7 +24,9 @@ struct NoteListView: View {
                     
                     ScrollView {
                         ForEach(someNoteList) { element in
-                            NoteButton(someNote: element)
+                            
+                            NavigationLink(destination: NoteView(someNote: element), label: { NoteButton(someNote: element)} )
+                            
                         }
                     }
                     
