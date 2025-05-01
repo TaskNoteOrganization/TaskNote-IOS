@@ -73,6 +73,8 @@ struct SettingsView: View {
                             Spacer()
                         }
                         
+                        Spacer()
+                        
                         Toggle("Dark Mode", isOn: $colorMode.darkMode).font(.title2)
                         
                         Spacer()
@@ -101,7 +103,7 @@ struct SettingsView: View {
                 HomeNavBar()
             }
             .padding()
-            .background(Color.bg3)
+            .background(Color.bg4)
             
         }.navigationBarBackButtonHidden(true)
             .preferredColorScheme(colorMode.darkMode ? .dark : .light)
