@@ -61,7 +61,7 @@ extension Task {
             id: UUID(uuidString: "44444444-4444-4444-4444-444444444444")!,
             userId: UUID(uuidString: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa")!,
             title: "Finish onboarding flow",
-            description: "Implement login, signup, and forgot password screens",
+            description: "### Implement login, signup, and forgot password screens",
             status: "in_progress",
             dueDate: Date(timeIntervalSince1970: 1_700_500_000), // mid Jan 2024
             parentId: nil,

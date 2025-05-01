@@ -22,7 +22,8 @@ struct ContentView: View {
     
     var body: some View {
         
-        NoteListView(someNoteList: Note.mockNotes)
+        NoteListView(someNoteList: Note.mockNotes)            .preferredColorScheme(colorMode.darkMode ? .dark : .light)
+
     }
 }
 

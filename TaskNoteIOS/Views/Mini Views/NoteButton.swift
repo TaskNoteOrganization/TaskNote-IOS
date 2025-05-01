@@ -44,6 +44,7 @@ struct NoteButton: View {
             Spacer()
             Spacer()
         }
+        .preferredColorScheme(colorMode.darkMode ? .dark : .light)
         
     }
 }

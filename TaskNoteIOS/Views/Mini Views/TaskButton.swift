@@ -47,6 +47,7 @@ struct TaskButton: View {
             Spacer()
             Spacer()
         }
+        .preferredColorScheme(colorMode.darkMode ? .dark : .light)
         
     }
 }

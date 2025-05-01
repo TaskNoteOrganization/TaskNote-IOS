@@ -20,6 +20,7 @@ struct TopMiniBar: View {
             Text(someTitle).foregroundStyle(Color.main).fontWeight(.bold).font(.title)
             
         }.frame(height: UIScreen.main.bounds.height * 0.08)
+            .preferredColorScheme(colorMode.darkMode ? .dark : .light)
             .environmentObject(ColorSettings())
         
     }
