@@ -18,15 +18,17 @@ public final class ColorSettings: ObservableObject {
 
 struct ContentView: View {
     
-    @StateObject var colorMode = ColorSettings()
+    @EnvironmentObject var colorMode: ColorSettings
     
     var body: some View {
         
-        NoteListView(someNoteList: Note.mockNotes)            .preferredColorScheme(colorMode.darkMode ? .dark : .light)
+        NoteListView(someNoteList: Note.mockNotes)
 
     }
 }
 
 #Preview {
     ContentView()
+        .environmentObject(ColorSettings(previewing : true))
+    
 }

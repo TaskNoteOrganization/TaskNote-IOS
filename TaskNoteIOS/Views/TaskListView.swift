@@ -74,7 +74,6 @@ struct TaskListView: View {
             
         }.navigationBarBackButtonHidden(true)
             .preferredColorScheme(colorMode.darkMode ? .dark : .light)
-            .environmentObject(ColorSettings())
 
     }
 }

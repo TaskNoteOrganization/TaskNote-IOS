@@ -39,7 +39,6 @@ struct TaskButton: View {
                 }
                 
             }.frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.06)
-                .environmentObject(ColorSettings())
             Spacer()
             Spacer()
             Spacer()
@@ -64,7 +63,7 @@ struct TaskStatusIcon: View {
             Image(systemName: getStatusIcon(someString: someTaskState))
                 .imageScale(.large)
                 .foregroundStyle(Color.main)
-        }.environmentObject(ColorSettings())
+        }.preferredColorScheme(colorMode.darkMode ? .dark : .light)
     }
     
 }

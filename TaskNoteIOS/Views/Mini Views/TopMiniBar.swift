@@ -21,7 +21,6 @@ struct TopMiniBar: View {
             
         }.frame(height: UIScreen.main.bounds.height * 0.08)
             .preferredColorScheme(colorMode.darkMode ? .dark : .light)
-            .environmentObject(ColorSettings())
         
     }
 }

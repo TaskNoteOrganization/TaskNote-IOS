@@ -32,7 +32,6 @@ struct NoteView: View {
             }
         }.background(Color.bg4)
         .preferredColorScheme(colorMode.darkMode ? .dark : .light)
-        .environmentObject(ColorSettings())
         .navigationBarBackButtonHidden(true)
         
     }

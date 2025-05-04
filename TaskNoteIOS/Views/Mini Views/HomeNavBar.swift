@@ -83,7 +83,6 @@ struct HomeNavBar: View {
             }.frame(width: (UIScreen.main.bounds.width * 0.95), height: UIScreen.main.bounds.height * 0.1)
         }
         .preferredColorScheme(colorMode.darkMode ? .dark : .light)
-        .environmentObject(ColorSettings())
         
     }
     
