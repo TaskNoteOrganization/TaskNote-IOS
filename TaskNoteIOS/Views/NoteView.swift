@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MarkdownUI
 
 struct NoteView: View {
     
@@ -18,13 +19,18 @@ struct NoteView: View {
             VStack
             {
                 
+                TopMiniBar(someTitle: someNote.title ?? "");
+
                 ZStack {
-                    HStack {
-                        Spacer()
-                        Text(someNote.title ?? "No title...")
-                        Spacer()
-                    }
-                }
+                    
+                    RoundedRectangle(cornerRadius: 10.0)
+                        .foregroundStyle(Color.mainOpposite)
+                    ScrollView {
+                        Markdown("test")
+                            .foregroundStyle(Color.base)
+                    }.frame(height: UIScreen.main.bounds.height * 0.65)
+                    
+                }.frame(width: UIScreen.main.bounds.width * 0.9, height: UIScreen.main.bounds.height * 0.69)
                 
                 
                 Spacer()

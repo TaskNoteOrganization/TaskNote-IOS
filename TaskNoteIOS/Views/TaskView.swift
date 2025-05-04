@@ -21,15 +21,6 @@ struct TaskView: View {
                 
                 TopMiniBar(someTitle: someTask.title)
                 
-//                ZStack {
-//                    HStack {
-//                        Spacer()
-//                        Text(someTask.title).font(.title)
-//                        Spacer()
-//                    }
-//                    
-//                }
-                
                 ZStack {
                     
                     RoundedRectangle(cornerRadius: 10.0)
