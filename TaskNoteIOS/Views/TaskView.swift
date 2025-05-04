@@ -11,6 +11,8 @@ import MarkdownUI
 struct TaskView: View {
     
     @EnvironmentObject var colorMode: ColorSettings
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     @State var someTask : Task
     
     var body: some View {
