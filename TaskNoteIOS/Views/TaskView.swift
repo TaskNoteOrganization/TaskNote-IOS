@@ -21,7 +21,7 @@ struct TaskView: View {
             VStack
             {
                 
-                TopMiniBar(someTitle: someTask.title)
+                TopTaskBar(someTitle: someTask.title)
                 
                 ZStack {
                     

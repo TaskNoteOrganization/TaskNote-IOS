@@ -15,11 +15,11 @@ struct BackButton: View {
     var body: some View {
         
         ZStack {
-            RoundedRectangle(cornerSize: CGSize.init(width: 30.0, height: 30.0)).foregroundStyle(Color.bg2)
+            RoundedRectangle(cornerSize: CGSize.init(width: 30.0, height: 30.0)).foregroundStyle(Color.bg3)
             
             Text("Back").foregroundStyle(Color.main).fontWeight(.bold).font(.title3)
             
-        }.frame(height: UIScreen.main.bounds.height * 0.05)
+        }.frame(width: UIScreen.main.bounds.width * 0.2, height: UIScreen.main.bounds.height * 0.05)
             .preferredColorScheme(colorMode.darkMode ? .dark : .light)
             .onTapGesture {
                 self.presentationMode.wrappedValue.dismiss()
