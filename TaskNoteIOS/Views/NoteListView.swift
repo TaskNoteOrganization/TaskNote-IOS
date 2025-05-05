@@ -9,6 +9,7 @@ import SwiftUI
 
 struct NoteListView: View {
     
+    @State var someNoteList : [Note]
     @EnvironmentObject var colorMode: ColorSettings
     
     var body: some View {
@@ -21,10 +22,13 @@ struct NoteListView: View {
                     
                     TopMiniBar(someTitle: "Note List")
                     
-                    Image(systemName: "globe")
-                        .imageScale(.large)
-                        .foregroundStyle(.tint)
-                    Text("Hello, world!")
+                    ScrollView {
+                        ForEach(someNoteList) { element in
+                            
+                            NavigationLink(destination: NoteView(someNote: element), label: { NoteButton(someNote: element)} )
+                            
+                        }
+                    }
                     
                     Spacer()
                     
@@ -37,15 +41,15 @@ struct NoteListView: View {
                 HomeNavBar()
             }
             .padding()
-            .background(Color.bg3)
+            .background(Color.bg4)
             
         }.navigationBarBackButtonHidden(true)
-            .environmentObject(ColorSettings())
+            .preferredColorScheme(colorMode.darkMode ? .dark : .light)
 
     }
 }
 
 #Preview {
-    NoteListView()
+    NoteListView(someNoteList: Note.mockNotes)
         .environmentObject(ColorSettings(previewing : true))
 }

@@ -6,7 +6,7 @@
 //
 import SwiftUI
 
-class ColorSettings: ObservableObject {
+public final class ColorSettings: ObservableObject {
     @Published var darkMode : Bool = true
     
     init(previewing: Bool = false) {
@@ -18,14 +18,17 @@ class ColorSettings: ObservableObject {
 
 struct ContentView: View {
     
-    @StateObject var colorMode = ColorSettings()
+    @EnvironmentObject var colorMode: ColorSettings
     
     var body: some View {
         
-        NoteListView()
+        NoteListView(someNoteList: Note.mockNotes)
+
     }
 }
 
 #Preview {
     ContentView()
+        .environmentObject(ColorSettings(previewing : true))
+    
 }
