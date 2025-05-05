@@ -30,10 +30,82 @@ struct TaskView: View {
                     ScrollView {
                         Markdown(someTask.description ?? "")
                             .foregroundStyle(Color.base)
-                    }.frame(height: UIScreen.main.bounds.height * 0.65)
+                    }.frame(height: UIScreen.main.bounds.height * 0.45)
                     
-                }.frame(width: UIScreen.main.bounds.width * 0.9, height: UIScreen.main.bounds.height * 0.69)
-
+                }.frame(width: UIScreen.main.bounds.width * 0.88, height: UIScreen.main.bounds.height * 0.5)
+                
+                Spacer()
+                
+                ZStack {
+                    
+                    RoundedRectangle(cornerRadius: 10.0)
+                        .foregroundStyle(Color.bg3)
+                    
+                    ScrollView {
+                        VStack {
+                            
+                            ZStack {
+                                
+                                RoundedRectangle(cornerRadius: 10.0)
+                                    .foregroundStyle(Color.bg2)
+                                
+                                HStack {
+                                    
+                                    Spacer()
+                                    
+                                    Text("Status: ")
+                                    Text(someTask.status)
+                                    
+                                    Spacer()
+                                    
+                                    TaskStatusIcon(someTaskState: someTask.status)
+                                    
+                                    Spacer()
+                                    
+                                }
+                                
+                            }.frame(height: UIScreen.main.bounds.height * 0.05)
+                            
+                            ZStack {
+                                
+                                RoundedRectangle(cornerRadius: 10.0)
+                                    .foregroundStyle(Color.bg2)
+                                
+                                HStack {
+                                    
+                                    Spacer()
+                                    
+                                    Text("Due Date: ")
+                                    Text(someTask.dueDate?.formatted(.iso8601.day().month().year() ) ?? "No due date")
+                                    
+                                    Spacer()
+                                    
+                                }
+                                
+                            }.frame(height: UIScreen.main.bounds.height * 0.05)
+                            
+                            ZStack {
+                                
+                                RoundedRectangle(cornerRadius: 10.0)
+                                    .foregroundStyle(Color.bg2)
+                                
+                                HStack {
+                                    
+                                    Spacer()
+                                    
+                                    Text("Creation Date: ")
+                                    Text(someTask.createdAt.formatted(.iso8601.day().month().year() ))
+                                    
+                                    Spacer()
+                                    
+                                }
+                                
+                            }.frame(height: UIScreen.main.bounds.height * 0.05)
+                            
+                        }
+                    }.frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.18)
+                    
+                }.frame(width: UIScreen.main.bounds.width * 0.88, height: UIScreen.main.bounds.height * 0.2)
                 
                 Spacer()
                 HomeNavBar()

@@ -14,31 +14,42 @@ struct TopTaskBar: View {
     
     var body: some View {
         
-        
-        ZStack {
-            Rectangle().foregroundStyle(Color.bg2)
-            
-            HStack {
+        NavigationStack {
+            ZStack {
+                Rectangle().foregroundStyle(Color.bg2)
                 
-                Spacer()
+                HStack {
+                    
+                    Spacer()
+                    
+                    BackButton()
+                    
+                    Spacer()
+                    
+                    ScrollView(.horizontal) {
+                        
+                        Text(someTitle).foregroundStyle(Color.main).fontWeight(.bold)
+                            .font(.title2)
+                        
+                        
+                    }.frame(width: UIScreen.main.bounds.width * 0.4, height: UIScreen.main.bounds.height * 0.05)
+                    
+                    
+                    Spacer()
+                    
+                    NavigationLink{
+                        NoteCreateView()
+                    } label: {
+                        MiscButton(someText: "Edit Task")
+                    }
+                    
+                    Spacer()
+                    
+                }
                 
-                BackButton()
-                
-                Spacer()
-                
-                Text(someTitle).foregroundStyle(Color.main).fontWeight(.bold).font(.title2).frame(width: UIScreen.main.bounds.width * 0.5)
-                
-                Spacer()
-                
-                BackButton()
-                
-                
-                Spacer()
-                
-            }
-            
-        }.frame(height: UIScreen.main.bounds.height * 0.08)
-            .preferredColorScheme(colorMode.darkMode ? .dark : .light)
+            }.frame(height: UIScreen.main.bounds.height * 0.08)
+                .preferredColorScheme(colorMode.darkMode ? .dark : .light)
+        }
         
     }
 }
