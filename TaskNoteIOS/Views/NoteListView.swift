@@ -21,10 +21,7 @@ struct NoteListView: View {
                     
                     TopMiniBar(someTitle: "Note List")
                     
-                    Image(systemName: "globe")
-                        .imageScale(.large)
-                        .foregroundStyle(.tint)
-                    Text("Hello, world!")
+                    
                     
                     Spacer()
                     

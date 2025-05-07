@@ -17,14 +17,11 @@ class ColorSettings: ObservableObject {
 }
 
 struct ContentView: View {
-    
-    @StateObject var colorMode = ColorSettings()
-    
     var body: some View {
-        
-        NoteListView()
+        LoginView()
     }
 }
+
 
 #Preview {
     ContentView()

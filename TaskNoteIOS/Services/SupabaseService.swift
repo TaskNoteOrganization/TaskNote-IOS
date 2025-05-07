@@ -4,26 +4,34 @@
 //
 //  Created by Alexander Betancourt on 4/15/25.
 //
+
 import Foundation
 import Supabase
 
-public final class SupabaseService {
+public final class SupabaseService: ObservableObject {
     public static let shared = SupabaseService()
-    
+
+    @Published var currentSession: Session? = nil
+
     // MARK: - Sign in / up / out
-    
+
     public func signUp(email: String, password: String) async throws -> AuthResponse {
         try await client.auth.signUp(email: email, password: password)
     }
     
     public func signIn(email: String, password: String) async throws -> Session {
-        try await client.auth.signIn(email: email, password: password)
+        let session = try await client.auth.signIn(email: email, password: password)
+        if let sessionData = try? JSONEncoder().encode(session) {
+            UserDefaults.standard.set(sessionData, forKey: "supabaseSession")
+        }
+            return session
     }
     
     public func signOut() async throws -> Void {
         try await client.auth.signOut()
+        self.currentSession = nil
     }
-    
+
     public func getCurrentUser() async throws -> User? {
         try await client.auth.session.user
     }
@@ -166,6 +174,7 @@ public final class SupabaseService {
         
         return newReminder
     }
+    
     
     // MARK: - Storage
     

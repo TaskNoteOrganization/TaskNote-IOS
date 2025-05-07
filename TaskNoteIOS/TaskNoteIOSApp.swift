@@ -4,16 +4,27 @@
 //
 //  Created by Alexander Betancourt on 4/15/25.
 //
+
 import SwiftUI
+import Foundation
 
 @main
 struct TaskNoteIOSApp: App {
     
-    @StateObject var darkMode = ColorSettings()
+    @StateObject private var supabaseService = SupabaseService.shared
+    @StateObject private var colorSettings = ColorSettings()
+    
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if supabaseService.currentSession != nil {
+                NoteListView()
+                    .environmentObject(colorSettings)
+            } else {
+                LoginView()
+                    .environmentObject(colorSettings)
+            }
         }
     }
 }
+
