@@ -53,11 +53,6 @@
 			path = TaskNoteIOSUITests;
 			sourceTree = "<group>";
 		};
-		D3C0336D2DBF1D7B00F6FDE2 /* Login */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Login;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,7 +92,6 @@
 				3813E2882DAF1C9F00BFBEDC /* TaskNoteIOSTests */,
 				3813E2922DAF1C9F00BFBEDC /* TaskNoteIOSUITests */,
 				3813E2762DAF1C9F00BFBEDC /* Products */,
-				D3C0336D2DBF1D7B00F6FDE2 /* Login */,
 			);
 			sourceTree = "<group>";
 		};
@@ -128,7 +122,6 @@
 			);
 			fileSystemSynchronizedGroups = (
 				3813E2772DAF1C9F00BFBEDC /* TaskNoteIOS */,
-				D3C0336D2DBF1D7B00F6FDE2 /* Login */,
 			);
 			name = TaskNoteIOS;
 			packageProductDependencies = (
