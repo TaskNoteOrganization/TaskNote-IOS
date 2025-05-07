@@ -6,18 +6,29 @@
 //
 import SwiftUI
 
-struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+public final class ColorSettings: ObservableObject {
+    @Published var darkMode : Bool = true
+    
+    init(previewing: Bool = false) {
+        if previewing {
+            darkMode = true
         }
-        .padding()
+    }
+}
+
+struct ContentView: View {
+    
+    @EnvironmentObject var colorMode: ColorSettings
+    
+    var body: some View {
+        
+        NoteListView(someNoteList: Note.mockNotes)
+
     }
 }
 
 #Preview {
     ContentView()
+        .environmentObject(ColorSettings(previewing : true))
+    
 }

@@ -8,9 +8,13 @@ import SwiftUI
 
 @main
 struct TaskNoteIOSApp: App {
+    
+    @EnvironmentObject var colorMode: ColorSettings
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(ColorSettings())
         }
     }
 }

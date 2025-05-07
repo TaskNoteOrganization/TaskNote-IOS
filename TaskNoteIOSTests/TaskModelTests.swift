@@ -12,15 +12,19 @@ import Testing
 @Suite("Task Model Tests")
 struct TaskModelTests {
     
-    private var formatter: DateFormatter {
-        DateFormatter.supabaseFixedMicrosecondFormatter
+    private var formatter: ISO8601DateFormatter {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        return formatter
     }
+
     
     private func iso(_ date: Date = Date()) -> String {
         formatter.string(from: date)
     }
     
-    @Test("Task Initialization")
+    @Test("Task Model - Task Initialization")
     func taskInitializationTest() throws {
         let json = """
         {
@@ -36,7 +40,7 @@ struct TaskModelTests {
         #expect(task.status == "pending")
     }
     
-    @Test("Task description")
+    @Test("Task Model - Task description")
     func taskDescriptionTest() throws {
         let json = """
         {
@@ -52,7 +56,7 @@ struct TaskModelTests {
         #expect(task.description == "Detailed task here")
     }
     
-    @Test("Task due date")
+    @Test("Task Model - Task due date")
     func taskDueDateTest() throws {
         let json = """
         {
@@ -68,7 +72,7 @@ struct TaskModelTests {
         #expect(task.dueDate != nil)
     }
     
-    @Test("Task parent ID")
+    @Test("Task Model - Task parent ID")
     func taskParentIDTest() throws {
         let parentId = UUID()
         let json = """
@@ -85,7 +89,7 @@ struct TaskModelTests {
         #expect(task.parentId == parentId)
     }
     
-    @Test("Task null description")
+    @Test("Task Model - Task null description")
     func taskNullDescriptionTest() throws {
         let json = """
         {
@@ -101,7 +105,7 @@ struct TaskModelTests {
         #expect(task.description == nil)
     }
     
-    @Test("Task null due date")
+    @Test("Task Model - Task null due date")
     func taskNullDueDateTest() throws {
         let json = """
         {
@@ -117,7 +121,7 @@ struct TaskModelTests {
         #expect(task.dueDate == nil)
     }
     
-    @Test("Task null parent ID")
+    @Test("Task Model - Task null parent ID")
     func taskNullParentIDTest() throws {
         let json = """
         {
@@ -133,7 +137,7 @@ struct TaskModelTests {
         #expect(task.parentId == nil)
     }
     
-    @Test("Task missing optional fields entirely")
+    @Test("Task Model - Task missing optional fields entirely")
     func taskMissingOptionalFieldsTest() throws {
         let json = """
         {
@@ -150,7 +154,7 @@ struct TaskModelTests {
         #expect(task.parentId == nil)
     }
     
-    @Test("Task all around")
+    @Test("Task Model - Task all around")
     func taskAllRoundTest() throws {
         let id = UUID()
         let userId = UUID()

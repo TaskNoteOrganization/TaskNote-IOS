@@ -54,3 +54,38 @@ public struct Task: Codable, Identifiable {
         return try JSONDecoder.supabaseDecoder.decode(Task.self, from: data)
     }
 }
+
+extension Task {
+    static let mockTasks: [Task] = [
+        Task(
+            id: UUID(uuidString: "44444444-4444-4444-4444-444444444444")!,
+            userId: UUID(uuidString: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa")!,
+            title: "Finish onboarding flow",
+            description: "### Implement login, signup, and forgot password screens. \n \n This is a test to see what a normal string looks like  \n test test ",
+            status: "in_progress",
+            dueDate: Date(timeIntervalSince1970: 1_700_500_000), // mid Jan 2024
+            parentId: nil,
+            createdAt: Date(timeIntervalSince1970: 1_700_000_000)
+        ),
+        Task(
+            id: UUID(uuidString: "55555555-5555-5555-5555-555555555555")!,
+            userId: UUID(uuidString: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb")!,
+            title: "Write unit tests",
+            description: nil,
+            status: "pending",
+            dueDate: nil,
+            parentId: nil,
+            createdAt: Date(timeIntervalSince1970: 1_705_000_000)
+        ),
+        Task(
+            id: UUID(uuidString: "66666666-6666-6666-6666-666666666666")!,
+            userId: UUID(uuidString: "cccccccc-cccc-cccc-cccc-cccccccccccc")!,
+            title: "Launch v1.0",
+            description: "Public App Store release",
+            status: "completed",
+            dueDate: Date(timeIntervalSince1970: 1_710_000_000),
+            parentId: UUID(uuidString: "44444444-4444-4444-4444-444444444444"), // Has parent (onboarding task)
+            createdAt: Date(timeIntervalSince1970: 1_705_000_000)
+        )
+    ]
+}
