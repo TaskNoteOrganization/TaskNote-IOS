@@ -32,7 +32,7 @@ struct SupabaseServiceTests {
             #expect(Bool(false), "Expected invalid sign-in to fail")
         } catch {
             #expect(true)
-        }
+        }https://fzlwnrnfreklyainlfpy.supabase.co/
     }
     
     @Test("Supabase Service - valid Sign in Test")

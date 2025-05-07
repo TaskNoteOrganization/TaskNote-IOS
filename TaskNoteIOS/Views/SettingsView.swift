@@ -11,6 +11,9 @@ struct SettingsView: View {
     
     @EnvironmentObject var colorMode : ColorSettings
     
+    @State private var logoutError: String? = nil
+
+    
     var body: some View {
         
         NavigationStack {
@@ -27,7 +30,7 @@ struct SettingsView: View {
                         
                         HStack {
                             
-                            Button(action: tempFunc) {
+                            Button(action: logout) {
                                 Label("Log out", systemImage: "arrow.up").font(.title2)
                             }
                             .buttonStyle(.bordered)
@@ -98,7 +101,6 @@ struct SettingsView: View {
                     
                 }.frame(height: UIScreen.main.bounds.height * 0.8)
                 
-                // Spacer()
                 
                 HomeNavBar()
             }
@@ -109,7 +111,20 @@ struct SettingsView: View {
             .preferredColorScheme(colorMode.darkMode ? .dark : .light)
         
     }
+    
+
+    func logout() {
+        async {
+            do {
+                try await SupabaseService.shared.signOut()
+            } catch {
+                logoutError = "Logout failed: \(error.localizedDescription)"
+                print(logoutError ?? "")
+            }
+        }
+    }
 }
+
 
 func tempFunc() {
     

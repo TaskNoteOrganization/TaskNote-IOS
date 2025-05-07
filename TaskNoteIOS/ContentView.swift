@@ -17,18 +17,19 @@ public final class ColorSettings: ObservableObject {
 }
 
 struct ContentView: View {
-    
-    @EnvironmentObject var colorMode: ColorSettings
-    
-    var body: some View {
-        
-        NoteListView(someNoteList: Note.mockNotes)
 
+    @EnvironmentObject var supabase: SupabaseService
+    @EnvironmentObject var colorMode: ColorSettings
+
+    var body: some View {
+        Group {
+            if supabase.currentSession != nil {
+                NoteListView(someNoteList: Note.mockNotes)
+            } else {
+                LoginView()
+            }
+        }
+        .preferredColorScheme(colorMode.darkMode ? .dark : .light)
     }
 }
 
-#Preview {
-    ContentView()
-        .environmentObject(ColorSettings(previewing : true))
-    
-}
