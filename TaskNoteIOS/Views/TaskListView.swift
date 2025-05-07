@@ -11,6 +11,9 @@ struct TaskListView: View {
     
     @EnvironmentObject var colorMode: ColorSettings
     
+    @State var someNoteList : [Note]
+    @State var someTaskList : [Task]
+    
     var body: some View {
         
         NavigationStack {
@@ -32,7 +35,11 @@ struct TaskListView: View {
                         
                         ScrollView
                         {
-                            
+                            ForEach(someTaskList) { element in
+                                
+                                NavigationLink(destination: TaskView(someTask: element), label: {TaskButton(someTask: element)})
+                                
+                            }
                         }.frame(height: UIScreen.main.bounds.height * 0.3)
                         
                     }
@@ -46,8 +53,12 @@ struct TaskListView: View {
                             
                         }
                         
-                        ScrollView {
-                            
+                        ScrollView{
+                            ForEach(someNoteList) { element in
+                                
+                                NavigationLink(destination: NoteView(someNote: element), label: { NoteButton(someNote: element)} )
+                                
+                            }
                         }
                         
                     }
@@ -59,15 +70,15 @@ struct TaskListView: View {
                 HomeNavBar()
             }
             .padding()
-            .background(Color.bg3)
+            .background(Color.bg4)
             
         }.navigationBarBackButtonHidden(true)
-            .environmentObject(ColorSettings())
+            .preferredColorScheme(colorMode.darkMode ? .dark : .light)
 
     }
 }
 
 #Preview {
-    TaskListView()
+    TaskListView(someNoteList: Note.mockNotes, someTaskList: Task.mockTasks)
         .environmentObject(ColorSettings(previewing : true))
 }

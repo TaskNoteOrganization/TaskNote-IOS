@@ -6,7 +6,7 @@
 //
 import SwiftUI
 
-class ColorSettings: ObservableObject {
+public final class ColorSettings: ObservableObject {
     @Published var darkMode : Bool = true
     
     init(previewing: Bool = false) {
@@ -17,12 +17,19 @@ class ColorSettings: ObservableObject {
 }
 
 struct ContentView: View {
+
+    @EnvironmentObject var supabase: SupabaseService
+    @EnvironmentObject var colorMode: ColorSettings
+
     var body: some View {
-        LoginView()
+        Group {
+            if supabase.currentSession != nil {
+                NoteListView(someNoteList: Note.mockNotes)
+            } else {
+                LoginView()
+            }
+        }
+        .preferredColorScheme(colorMode.darkMode ? .dark : .light)
     }
 }
 
-
-#Preview {
-    ContentView()
-}

@@ -11,7 +11,6 @@ struct SettingsView: View {
     
     @EnvironmentObject var colorMode : ColorSettings
     
-    @Environment(\.dismiss) var dismiss
     @State private var logoutError: String? = nil
 
     
@@ -77,6 +76,8 @@ struct SettingsView: View {
                             Spacer()
                         }
                         
+                        Spacer()
+                        
                         Toggle("Dark Mode", isOn: $colorMode.darkMode).font(.title2)
                         
                         Spacer()
@@ -104,15 +105,14 @@ struct SettingsView: View {
                 HomeNavBar()
             }
             .padding()
-            .background(Color.bg3)
+            .background(Color.bg4)
             
         }.navigationBarBackButtonHidden(true)
             .preferredColorScheme(colorMode.darkMode ? .dark : .light)
-            .environmentObject(ColorSettings())
         
     }
     
-    
+
     func logout() {
         async {
             do {
@@ -123,10 +123,7 @@ struct SettingsView: View {
             }
         }
     }
-    
 }
-
-
 
 
 func tempFunc() {

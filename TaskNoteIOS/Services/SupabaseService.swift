@@ -7,31 +7,40 @@
 
 import Foundation
 import Supabase
+import Combine
 
-public final class SupabaseService: ObservableObject {
+
+
+public final class SupabaseService : ObservableObject{
     public static let shared = SupabaseService()
 
-    @Published var currentSession: Session? = nil
+        @Published var currentSession: Session? = nil
 
     // MARK: - Sign in / up / out
-
-    public func signUp(email: String, password: String) async throws -> AuthResponse {
-        try await client.auth.signUp(email: email, password: password)
-    }
     
+    
+        public func signUp(email: String, password: String) async throws -> AuthResponse {
+            let response = try await client.auth.signUp(email: email, password: password)
+            self.currentSession = response.session
+            return response
+        }
+
     public func signIn(email: String, password: String) async throws -> Session {
         let session = try await client.auth.signIn(email: email, password: password)
-        if let sessionData = try? JSONEncoder().encode(session) {
-            UserDefaults.standard.set(sessionData, forKey: "supabaseSession")
+        DispatchQueue.main.async {
+            self.currentSession = session
         }
-            return session
-    }
-    
-    public func signOut() async throws -> Void {
-        try await client.auth.signOut()
-        self.currentSession = nil
+        return session
     }
 
+
+        public func signOut() async throws {
+            try await client.auth.signOut()
+            DispatchQueue.main.async {
+                self.currentSession = nil
+            }
+        }
+    
     public func getCurrentUser() async throws -> User? {
         try await client.auth.session.user
     }

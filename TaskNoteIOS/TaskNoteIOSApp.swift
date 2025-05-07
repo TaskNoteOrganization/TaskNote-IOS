@@ -10,21 +10,18 @@ import Foundation
 
 @main
 struct TaskNoteIOSApp: App {
-    
-    @StateObject private var supabaseService = SupabaseService.shared
-    @StateObject private var colorSettings = ColorSettings()
-    
-    
+
+    @StateObject var supabase = SupabaseService.shared
+    @StateObject var colorSettings = ColorSettings()
+
     var body: some Scene {
         WindowGroup {
-            if supabaseService.currentSession != nil {
-                NoteListView()
-                    .environmentObject(colorSettings)
-            } else {
-                LoginView()
-                    .environmentObject(colorSettings)
-            }
+            ContentView()
+                .environmentObject(supabase)
+                .environmentObject(colorSettings)
         }
     }
 }
+
+
 

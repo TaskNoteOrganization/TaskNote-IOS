@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "originHash" : "74ab41bd85b87098b4d1feb2574cc41c6ee4a2199d286a7329023faec9270074",
+=======
+  "originHash" : "8057e1401e013af99c4a40dc107902ee815177116002201a3d1ad369684e3cd6",
+>>>>>>> main
   "pins" : [
     {
       "identity" : "keychain-swift",

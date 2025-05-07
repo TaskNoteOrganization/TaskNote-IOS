@@ -24,7 +24,7 @@ struct HomeNavBar: View {
                     
                     Spacer()
                     
-                    NavigationLink{NoteListView()} label: {
+                    NavigationLink{NoteListView(someNoteList : Note.mockNotes)} label: {
                         
                         ZStack {
                             
@@ -41,7 +41,7 @@ struct HomeNavBar: View {
                     
                     Spacer()
                     
-                    NavigationLink{TaskListView()} label: {
+                    NavigationLink{TaskListView(someNoteList: Note.mockNotes, someTaskList: Task.mockTasks)} label: {
                         
                         ZStack {
                             
@@ -82,7 +82,7 @@ struct HomeNavBar: View {
                 
             }.frame(width: (UIScreen.main.bounds.width * 0.95), height: UIScreen.main.bounds.height * 0.1)
         }
-        .environmentObject(ColorSettings())
+        .preferredColorScheme(colorMode.darkMode ? .dark : .light)
         
     }
     
