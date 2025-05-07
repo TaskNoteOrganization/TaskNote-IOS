@@ -14,6 +14,16 @@ struct TaskListView: View {
     @State var someNoteList : [Note]
     @State var someTaskList : [Task]
     
+    @State var sortedTaskList : [Task]
+    
+    init(someNoteList : [Note], someTaskList: [Task]) {
+        
+        self.someNoteList = someNoteList;
+        self.someTaskList = someTaskList;
+        
+        self.sortedTaskList = sortTasks(listOfTasks: someTaskList)
+    }
+    
     var body: some View {
         
         NavigationStack {
@@ -35,7 +45,7 @@ struct TaskListView: View {
                         
                         ScrollView
                         {
-                            ForEach(someTaskList) { element in
+                            ForEach(sortedTaskList) { element in
                                 
                                 NavigationLink(destination: TaskView(someTask: element), label: {TaskButton(someTask: element)})
                                 
@@ -76,6 +86,14 @@ struct TaskListView: View {
             .preferredColorScheme(colorMode.darkMode ? .dark : .light)
 
     }
+}
+
+func sortTasks(listOfTasks : [Task]) -> [Task] {
+    var someNewTaskList : [Task] = listOfTasks.sorted { $0.dueDate ?? Date.init() < $1.dueDate ?? Date.init()}
+    
+    
+    
+    return someNewTaskList;
 }
 
 #Preview {

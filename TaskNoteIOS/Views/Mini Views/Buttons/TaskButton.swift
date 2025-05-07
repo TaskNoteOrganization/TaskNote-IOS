@@ -18,7 +18,7 @@ struct TaskButton: View {
         HStack {
             Spacer()
             ZStack {
-                Rectangle().foregroundStyle(Color.bg3)
+                Rectangle().foregroundStyle(getColorToUse(someTask: someTask))
                 
                 HStack{
                     
@@ -83,7 +83,25 @@ func getStatusIcon(someString : String) -> String {
     
 }
 
+func getColorToUse(someTask : Task) -> Color {
+    
+    if ((someTask.dueDate) != nil) {
+        
+        if (someTask.status == "completed"){
+            return Color.good;
+        }
+        else if((someTask.dueDate ?? Date.init()) < Date.init())
+        {
+            return Color.bad;
+        }
+        
+    }
+    
+    return Color.bg3
+    
+}
+
 #Preview {
-    TaskButton(someTask: Task.mockTasks[0])
+    TaskButton(someTask: Task.mockTasks[2])
         .environmentObject(ColorSettings(previewing : true))
 }

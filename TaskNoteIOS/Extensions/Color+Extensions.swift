@@ -14,4 +14,6 @@ extension Color {
     static let bg2 = Color("Background2")
     static let bg3 = Color("Background3")
     static let bg4 = Color("Background4")
+    static let good = Color("GoodTone")
+    static let bad = Color("BadTone")
 }
