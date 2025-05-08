@@ -16,8 +16,17 @@ struct SupabaseServiceTests {
     private let password = "password123"
 
     private func signInIfNeeded() async throws {
-        _ = try await SupabaseService.shared.signIn(email: email, password: password)
+        for _ in 0..<3 {
+            do {
+                _ = try await SupabaseService.shared.signIn(email: email, password: password)
+                return
+            } catch {
+                try await _Concurrency.Task.sleep(nanoseconds: 500_000_000)
+            }
+        }
+        throw NSError(domain: "SupabaseServiceTests", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to sign in after 3 retries"])
     }
+
     
     private func randomMarkdownData(title: String = "Hello World") -> (data: Data, filename: String) {
         let data = "# \(title)".data(using: .utf8)!
@@ -32,7 +41,7 @@ struct SupabaseServiceTests {
             #expect(Bool(false), "Expected invalid sign-in to fail")
         } catch {
             #expect(true)
-        }https://fzlwnrnfreklyainlfpy.supabase.co/
+        }
     }
     
     @Test("Supabase Service - valid Sign in Test")
@@ -249,5 +258,96 @@ struct SupabaseServiceTests {
         let markdown = String(data: downloaded, encoding: .utf8)
         #expect(markdown?.contains("Integration Note") == true)
     }
+    @Test("Supabase Service - Delete Note Test")
+    func deleteNoteTest() async throws {
+        try await signInIfNeeded()
+        
+        let (fileData, filename) = randomMarkdownData(title: "DeleteNoteTest")
+        let path = try await SupabaseService.shared.uploadMarkdownFile(data: fileData, filename: filename)
+        let note = try await SupabaseService.shared.createNote(title: "DeleteMe Note", path: path)
+        
+        try await SupabaseService.shared.deleteNote(noteID: note.id)
+        
+        let notes = try await SupabaseService.shared.fetchNotes()
+        #expect(!notes.contains { $0.id == note.id })
+    }
+
+    @Test("Supabase Service - Delete Task Test")
+    func deleteTaskTest() async throws {
+        try await signInIfNeeded()
+        
+        let task = try await SupabaseService.shared.createTask(title: "DeleteMe Task")
+        try await SupabaseService.shared.deleteTask(taskID: task.id)
+        
+        let tasks = try await SupabaseService.shared.fetchTasks()
+        #expect(!tasks.contains { $0.id == task.id })
+    }
+    @Test("Supabase Service - Delete Note Task Link Test")
+    func deleteNoteTaskLinkTest() async throws {
+        try await signInIfNeeded()
+        
+        let task = try await SupabaseService.shared.createTask(title: "LinkDelete Task")
+        let (fileData, filename) = randomMarkdownData(title: "LinkDelete Note")
+        let path = try await SupabaseService.shared.uploadMarkdownFile(data: fileData, filename: filename)
+        let note = try await SupabaseService.shared.createNote(title: "LinkDelete Note", path: path)
+        let link = try await SupabaseService.shared.createTaskLink(taskID: task.id, noteID: note.id)
+        
+        try await SupabaseService.shared.deleteTaskLink(noteID: note.id, taskID: task.id)
+        
+        let links = try await SupabaseService.shared.fetchNoteTaskLinks()
+        #expect(!links.contains { $0.noteId == note.id && $0.taskId == task.id })
+    }
+    @Test("Supabase Service - Full CRUD Integration Test")
+    func fullCrudIntegrationTest() async throws {
+        try await signInIfNeeded()
+        
+        // Step 1: Upload markdown file
+        let (fileData, filename) = randomMarkdownData(title: "Full CRUD")
+        let path = try await SupabaseService.shared.uploadMarkdownFile(data: fileData, filename: filename)
+        
+        // Step 2: Create a note
+        let note = try await SupabaseService.shared.createNote(title: "Full CRUD Note", path: path)
+        #expect(note.filePath == path)
+        
+        // Step 3: Create a task
+        let task = try await SupabaseService.shared.createTask(title: "Full CRUD Task")
+        #expect(task.title == "Full CRUD Task")
+        
+        // Step 4: Link the note to the task
+        let link = try await SupabaseService.shared.createTaskLink(taskID: task.id, noteID: note.id)
+        #expect(link.noteId == note.id && link.taskId == task.id)
+        
+        // Step 5: Create a reminder for the task
+        let remindTime = Date().addingTimeInterval(3600)
+        let reminder = try await SupabaseService.shared.createReminder(taskID: task.id, time: remindTime)
+        #expect(reminder.taskId == task.id)
+        
+        // Step 6: Confirm all data exists
+        let allNotes = try await SupabaseService.shared.fetchNotes()
+        let allTasks = try await SupabaseService.shared.fetchTasks()
+        let allLinks = try await SupabaseService.shared.fetchNoteTaskLinksFromNote(noteID: note.id)
+        let taskReminders = try await SupabaseService.shared.fetchRemindersFromTask(taskID: task.id)
+        
+        #expect(allNotes.contains { $0.id == note.id })
+        #expect(allTasks.contains { $0.id == task.id })
+        #expect(allLinks.contains { $0.taskId == task.id && $0.noteId == note.id })
+        #expect(taskReminders.contains { $0.id == reminder.id })
+        
+        // Step 7: Delete the task link
+        try await SupabaseService.shared.deleteTaskLink(noteID: note.id, taskID: task.id)
+        let linksAfterDelete = try await SupabaseService.shared.fetchNoteTaskLinksFromNote(noteID: note.id)
+        #expect(!linksAfterDelete.contains { $0.taskId == task.id })
+        
+        // Step 8: Delete the note and task
+        try await SupabaseService.shared.deleteNote(noteID: note.id)
+        try await SupabaseService.shared.deleteTask(taskID: task.id)
+        
+        let remainingNotes = try await SupabaseService.shared.fetchNotes()
+        let remainingTasks = try await SupabaseService.shared.fetchTasks()
+        
+        #expect(!remainingNotes.contains { $0.id == note.id })
+        #expect(!remainingTasks.contains { $0.id == task.id })
+    }
+
 
 }
