@@ -219,6 +219,34 @@ public final class SupabaseService : ObservableObject{
         return session
     }
     
+    // MARK: - Delete
+    public func deleteNote(noteID: UUID) async throws {
+        try await client
+            .from("notes")
+            .delete()
+            .eq("id", value: noteID.uuidString)
+            .execute()
+    }
+
+    public func deleteTask(taskID: UUID) async throws {
+        try await client
+            .from("tasks")
+            .delete()
+            .eq("id", value: taskID.uuidString)
+            .execute()
+    }
+
+    public func deleteTaskLink(noteID: UUID, taskID: UUID) async throws {
+        try await client
+            .from("note_task_links")
+            .delete()
+            .eq("note_id", value: noteID.uuidString)
+            .eq("task_id", value: taskID.uuidString)
+            .execute()
+    }
+
+
+    
     
     private init() {}
     private let supabaseUrl = URL(string: "https://fzlwnrnfreklyainlfpy.supabase.co")!
