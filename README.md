@@ -48,10 +48,10 @@ TaskNotes is a lightweight productivity app designed for creatives and developer
 - [ ] **Login Screen**
 * Login with username and password
 * _Optional: Oauth with Google and github_
-- [ ] **Task List Screen**
+- [x] **Task List Screen**
 * List of all the saved tasks, ordered by due date.
 * Overdue tasks in a list below
-- [ ] **Individual Task Screen**
+- [x] **Individual Task Screen**
 * Allows the user to see all other linked notes and tasks
 * Shows task completion dependent on the completion of other linked tasks
 - [ ] **Making/Modifying Task**
@@ -59,7 +59,7 @@ TaskNotes is a lightweight productivity app designed for creatives and developer
 * Allows the user to make/edit a md file to be viewed at a later time
 * Allow the user to link other notes/tasks on this page
 * Make a system for users that allows them to look up other created notes/tasks for easy linkage
-- [ ] **Notes List Screen**
+- [x] **Notes List Screen**
 * List of all the saved notes
 * Can select a note and view it 
 - [ ] **Individual Note Screen**
@@ -67,7 +67,7 @@ TaskNotes is a lightweight productivity app designed for creatives and developer
 * Preview to see it rendered, it saves when ever changes are made.
 * Can create a task with a top button
 * Tasks are written below the note.
-- [ ] **Overview Screen**
+- [x] **Overview Screen**
 * See recent notes, and tasks with the most recent due date.
 
 ### 3. Navigation
@@ -120,3 +120,13 @@ TaskNotes is a lightweight productivity app designed for creatives and developer
 #### Sprint 2 report
 
 [![Video Title](https://img.youtube.com/vi/z0jKObNgwR8/0.jpg)](https://www.youtube.com/watch?v=z0jKObNgwR8)
+
+### End Result
+
+#### Back end and screens
+
+<div>
+    <a href="https://www.loom.com/share/2eba67faca7d43998490995a8cd431f4">
+      <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/2eba67faca7d43998490995a8cd431f4-b418d22e3541a488-full-play.gif">
+    </a>
+  </div>
